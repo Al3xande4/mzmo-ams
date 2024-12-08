@@ -1,5 +1,7 @@
 .preview {
 	position: relative;
+
+	padding: 0 20px;
 }
 
 .preview-images {
@@ -20,12 +22,14 @@
 
 .title {
 	margin-top: 6rem ;
+	padding: 0 20px;
 }
 
 .subtitle {
 	margin-top: 0;
 	font-size: 2rem;
 	margin-bottom: 4rem;
+	padding: 0 20px;
 }
 
 .preview-info {
@@ -93,10 +97,23 @@
 
 .ways {
 	list-style: none;
+	padding: 0;
 
 	display: grid;
 	grid-template-columns: repeat(6, 1fr);
 	margin-bottom: 70px;
+}
+
+@media screen and (max-width: 1280px){
+	.ways {
+		grid-template-columns: repeat(3, 1fr);
+	}	
+}
+
+@media screen and (max-width: 840px){
+	.ways {
+		grid-template-columns: repeat(2, 1fr);
+	}	
 }
 
 .how-it-works {
@@ -176,6 +193,7 @@
 
 .requirements-item {
 	max-width: 250px;
+	width: 25%;
 	max-height: 250px;
 	height: 100%;
 	padding: 25px;
@@ -192,7 +210,7 @@
 }
 
 .questions {
-	padding: 120px;
+	padding: 120px 20px;
 
 	background-color: #10B582;
 	background-color: var(--secondary-color);
@@ -210,6 +228,7 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	justify-content: center;
+	gap: 20px;
 	align-items: center;
 }
 
@@ -223,6 +242,7 @@
 }
 
 .question-img{
+	width: 100%;
 	border-top-right-radius: 120px;
 
 	z-index: 1;
@@ -234,6 +254,7 @@
 .about-us {
 	padding: 50px 0;
 	padding-bottom: 100px;
+
 }
 
 .about-us-inner {
@@ -266,6 +287,12 @@
 	gap: 100px 150px;
 }
 
+@media screen and (max-width: 880px) {
+	.about-us-list {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
 .about-us-item {
 	display: flex;
 	flex-direction: column;
@@ -280,7 +307,7 @@
 }
 
 .our-projects {
-	padding: 100px 0;
+	padding: 100px 20px;
 	background-color: #e5e7ea;
 }
 
