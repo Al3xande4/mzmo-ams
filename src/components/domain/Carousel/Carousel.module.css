@@ -1,0 +1,66 @@
+.carousel {
+	max-width: 100%;
+	height: 450px;
+
+	display: flex;
+	align-items: center;
+
+	position: relative;
+}
+
+
+.window {
+	height: 100%;
+	width: fit-content;
+
+	overflow: hidden;
+}
+
+@media screen and (max-width: 1408px) {
+	.window {
+		max-width: 100vw;
+	}
+}
+
+.pages-container {
+	height: 100%;
+	display: flex;
+
+	transition: all;
+	transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.arrow {
+	cursor: pointer;
+	width: 2.5rem;
+	height: 2.5rem;
+
+	position: absolute;
+	top: -5rem;
+	cursor: pointer;
+	user-select: none;
+
+	transition: all;
+	transition-duration: 250ms;
+	transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+	fill: black;
+}
+.arrow:first-child {
+	transform: rotateZ(180deg);
+	left: 10px;
+}
+
+.arrow:first-child:hover {
+	transform: rotateZ(180deg) scale(1.05);
+}
+
+.arrow:hover {
+	transform: scale(1.05);
+	fill: var(--primary-color);
+}
+
+
+
+.arrow:nth-child(3) {
+	left: 60px;
+}

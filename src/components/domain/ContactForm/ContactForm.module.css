@@ -1,0 +1,46 @@
+.inputs {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+}
+
+.fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+
+	position: relative;
+}
+
+.fieldset.big {
+	grid-column: span 2;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	justify-content: center;
+}
+
+.hidden {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.label {
+	position: absolute;
+	left: 22.5px;
+	top: 5px;
+
+	font-size: 8px;
+	font-weight: 500;
+	line-height: 18px;
+	color: #828282;
+
+	bottom: 16px;
+
+	transition-property: all;
+	transition-duration: 2s;
+	transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

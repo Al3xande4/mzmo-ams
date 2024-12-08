@@ -1,0 +1,343 @@
+.preview {
+	position: relative;
+}
+
+.preview-images {
+	margin: 0 auto;
+	padding: 0;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-rows: auto;
+}
+
+@media screen and (max-width: 1480px) {
+}
+
+.preview-image {
+	width: 100%;
+}
+
+.title {
+	margin-top: 6rem ;
+}
+
+.subtitle {
+	margin-top: 0;
+	font-size: 2rem;
+	margin-bottom: 4rem;
+}
+
+.preview-info {
+	max-width: 350px;
+	text-align: center;
+
+	position: absolute;
+	top: 200px;
+	right: 140px;
+
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 28px;
+	color: rgba(255, 255, 255, 0.95);
+}
+
+.preview-card {
+	margin: 30px auto;
+	bottom: -80px;
+
+	max-width: 400px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+	align-items: center;
+}
+
+.preview-text {
+	padding: 0 25px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background-color: var(--secondary-color);
+	align-items: center;
+	justify-content: center;
+	text-transform: uppercase;
+
+	font-size: 14px;
+
+	text-align: center;
+	font-weight: 500;
+	line-height: 28px;
+	color: var(--light-color);
+}
+.preview-text:hover {
+	cursor: pointer;
+}
+
+.usage-section {
+	background-color: var(--primary-color);
+	color: white;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-items: center;
+
+	padding: 50px 0;
+}
+
+.usage-title {
+	font-size: 2rem;
+	margin-bottom: 40px;
+}
+
+.ways {
+	list-style: none;
+
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	margin-bottom: 70px;
+}
+
+.how-it-works {
+	margin-top: 150px;
+	background-color: var(--secondary-color);
+
+	color: white;
+	padding: 50px 0;
+}
+
+.how-it-works-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+	align-items: center;
+	justify-content: center;
+	justify-items: end;
+}
+
+.how-it-works img {
+	width: 100%;
+}
+
+.works-title {
+	color: white;
+}
+
+.works-info {
+	justify-self: start;
+
+	padding-left: 50px;
+}
+
+.advantage-title {
+
+}
+
+.advantages {
+	list-style: none;
+
+	display: flex;
+	flex-direction: column;
+}
+
+.advantages-item {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	color: #c5f1cb;
+	justify-content: start;
+}
+
+.advantage-icon {
+	max-width: 25px;
+	aspect-ratio: 1 / 1;
+}
+
+.requirements {
+	padding: 100px 0;
+}
+
+.requirements-title {
+	color: black;
+	text-align: center;
+}
+
+.requirements-list {
+	list-style: none;
+	padding: 0;
+
+	display: flex;
+	align-items: start;
+	justify-content: center;
+	gap: 30px;
+}
+
+
+.requirements-item {
+	max-width: 250px;
+	max-height: 250px;
+	height: 100%;
+	padding: 25px;
+	text-align: center;
+	justify-self: center;
+	overflow-y: scroll;
+	scrollbar-color: white white;
+}
+
+
+.requirements-icon {
+	width: 30px;
+	height: 30px;
+}
+
+.about-us {
+	padding: 50px 0;
+	padding-bottom: 100px;
+}
+
+.about-us-inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.about-us-title {
+	margin-bottom: 0;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.about-us-subtitle {
+	padding: 0;
+	margin: 0;
+	margin-top: 20px;
+	font-size: 20px;
+}
+
+.about-us-list {
+	list-style: none;
+	padding: 0;
+	margin-top: 100px;
+
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 100px 150px;
+}
+
+.about-us-item {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 28px;
+}
+
+.our-projects {
+	padding: 100px 0;
+	background-color: #e5e7ea;
+}
+
+.projects-inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 30px;
+	flex-direction: column;
+}
+
+.carousel {
+	margin: 0 auto;
+}
+.carousel-page {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.carousel-page img{
+	height: 100%;
+
+	object-fit: cover;
+}
+
+.faq-inner {
+	padding: 20px;
+	margin-top: 100px;
+}
+
+.faq-list {
+	list-style: none;
+	
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+}
+
+.in-touch {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+
+	padding: 150px 146px;
+
+	padding-bottom: 133px;
+}
+
+.in-touch .preview-card {
+	position: relative;
+	left: 0;
+	bottom: 0;
+
+	width: 100%;
+}
+
+.in-touch-card img {
+	width: 100%;
+}
+
+.in-touch-card {
+	max-width: 386px;
+	padding-top: 46px;
+
+	margin-left: auto;
+	
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
+}
+
+.in-touch-info {
+	padding: 0;
+	margin: 0;
+
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 30px;
+	color: #000000;
+}
+
+.place-info {
+	margin-bottom: 20px;
+}
+
+.socials {
+	margin: 0;
+	padding: 0;
+	margin-top: 50px;
+
+	list-style: none;
+
+	display: flex;
+	flex-direction: row;
+	gap: 40px;
+}
