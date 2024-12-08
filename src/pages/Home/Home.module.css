@@ -191,6 +191,46 @@
 	height: 30px;
 }
 
+.questions {
+	padding: 120px;
+
+	background-color: #10B582;
+	background-color: var(--secondary-color);
+	color: #FDFDFD;
+}
+
+.question-title {
+	color: #FDFDFD;
+	font-weight: 58px;
+	line-height: 120%;
+
+}
+
+.questions-inner {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-content: center;
+	align-items: center;
+}
+
+.question-img-wrapper {
+	border-top-right-radius: 120px;
+	border: 1px dashed #FDFDFD;
+
+	position: relative;
+	width: 100%;
+	max-width: 470px;
+}
+
+.question-img{
+	border-top-right-radius: 120px;
+
+	z-index: 1;
+	position: relative;
+	top: 30px;
+	right: 30px;
+}
+
 .about-us {
 	padding: 50px 0;
 	padding-bottom: 100px;
@@ -284,37 +324,6 @@
 	gap: 30px;
 }
 
-.in-touch {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-
-	padding: 150px 146px;
-
-	padding-bottom: 133px;
-}
-
-.in-touch .preview-card {
-	position: relative;
-	left: 0;
-	bottom: 0;
-
-	width: 100%;
-}
-
-.in-touch-card img {
-	width: 100%;
-}
-
-.in-touch-card {
-	max-width: 386px;
-	padding-top: 46px;
-
-	margin-left: auto;
-	
-	display: flex;
-	align-items: flex-end;
-	flex-direction: column;
-}
 
 .in-touch-info {
 	padding: 0;
@@ -328,16 +337,4 @@
 
 .place-info {
 	margin-bottom: 20px;
-}
-
-.socials {
-	margin: 0;
-	padding: 0;
-	margin-top: 50px;
-
-	list-style: none;
-
-	display: flex;
-	flex-direction: row;
-	gap: 40px;
 }

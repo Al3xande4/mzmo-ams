@@ -103,7 +103,9 @@ export function ContactForm({ className, ...props }: ContactFormProps) {
 					></Textarea>
 				</fieldset>
 			</div>
-			<Button type='submit'>Отправить</Button>
+			<Button className={styles['submit']} type='submit'>
+				Отправить
+			</Button>
 		</form>
 	);
 }

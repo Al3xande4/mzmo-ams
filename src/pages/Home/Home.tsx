@@ -10,6 +10,7 @@ import { HashLink } from 'react-router-hash-link';
 import { customScroll } from '../../helpers/scroll';
 import { FaqItem } from '../../components/domain/FaqItem/FaqItem';
 import { useEffect, useState } from 'react';
+import { ContactForm } from '../../components/domain/ContactForm/ContactForm';
 
 const images = [
 	'/mzmo-ams/model (1).jpg',
@@ -62,9 +63,14 @@ function HomePage() {
 						>
 							<Button size='large'>Как это работает</Button>
 						</HashLink>
-						<div className={styles['preview-text']}>
+						<HashLink
+							scroll={customScroll}
+							smooth
+							to={'#ask-question'}
+							className={styles['preview-text']}
+						>
 							получить КП
-						</div>
+						</HashLink>
 					</div>
 				</section>
 			</Wrapper>
@@ -316,8 +322,29 @@ function HomePage() {
 				</Wrapper>
 			</section>
 
-			<section id='ask-queastion' className={styles['questions']}>
-				<Heading></Heading>
+			<section id='ask-question' className={styles['questions']}>
+				<Wrapper>
+					<div className={styles['questions-inner']}>
+						<div className={styles['question-img-wrapper']}>
+							<img
+								className={styles['question-img']}
+								src='/mzmo-ams/contact.jpg'
+								alt='фотогарция'
+							></img>
+						</div>
+						<div className={styles['question-desc']}>
+							<Heading
+								className={styles['question-title']}
+								type='h2'
+							>
+								Есть вопросы?
+								<br /> Задайте их прямо сейчас
+							</Heading>
+
+							<ContactForm />
+						</div>
+					</div>
+				</Wrapper>
 			</section>
 
 			<section id='about-us' className={styles['about-us']}>
@@ -408,64 +435,17 @@ function HomePage() {
 								title='Как то то то то?'
 								text='А вот так вот'
 							/>
+							<FaqItem
+								title='Как то то то то?'
+								text='А вот так вот'
+							/>
+							<FaqItem
+								title='Как то то то то?'
+								text='А вот так вот'
+							/>
 						</ul>
 					</div>
 				</Wrapper>
-			</section>
-
-			<section className={styles['in-touch']}>
-				<div className={styles['in-touch-text']}>
-					<Heading type='h2'>Stay in touch with us</Heading>
-					<p
-						className={classNames(
-							styles['in-touch-info'],
-							styles['place-info']
-						)}
-					>
-						Vesterborg, Denmark
-					</p>
-					<p className={styles['in-touch-info']}>+123 456 789 000</p>
-					<p className={styles['in-touch-info']}>
-						info@theglasshuts.com
-					</p>
-
-					<ul className={styles.socials}>
-						<a href=''>
-							<Button size='small'>
-								<img src='/glass-huts/instagram.svg'></img>
-							</Button>
-						</a>
-
-						<a href=''>
-							<Button size='small'>
-								<img src='/glass-huts/Facebook.svg'></img>
-							</Button>
-						</a>
-
-						<a href=''>
-							<Button size='small'>
-								<img src='/glass-huts/X.svg'></img>
-							</Button>
-						</a>
-					</ul>
-				</div>
-				<div className={styles['in-touch-card']}>
-					<img src='/glass-huts/observer.jpg'></img>
-					<div className={styles['preview-card']}>
-						<NavLink to={'/booking'}>
-							<Button size='large'>Book Now</Button>
-						</NavLink>
-						<div className={styles['preview-prize']}>
-							<span className={styles['preview-prize-left']}>
-								from
-							</span>
-							Є3.200
-							<span className={styles['preview-prize-right']}>
-								per night
-							</span>
-						</div>
-					</div>
-				</div>
 			</section>
 		</div>
 	);

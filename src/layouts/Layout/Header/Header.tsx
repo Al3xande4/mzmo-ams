@@ -59,16 +59,16 @@ function Header({ className }: HeaderProps) {
 					Требования
 				</HashLink>
 
-				<NavLink
-					to={'/about'}
-					className={({ isActive }) =>
-						cn(styles.link, {
-							[styles.active]: isActive,
-						})
-					}
+				<HashLink
+					smooth
+					to='#ask-question'
+					scroll={(el) => {
+						customScroll(el);
+					}}
+					className={cn(styles.link)}
 				>
 					Задать вопрос
-				</NavLink>
+				</HashLink>
 
 				<HashLink
 					smooth
@@ -93,7 +93,7 @@ function Header({ className }: HeaderProps) {
 				</HashLink>
 			</nav>
 
-			<HashLink scroll={customScroll} smooth to={'/booking'}>
+			<HashLink scroll={customScroll} smooth to={'#ask-question'}>
 				<Button className={styles.connect}>Обратная связь</Button>
 			</HashLink>
 		</header>

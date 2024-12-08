@@ -28,6 +28,14 @@
 	visibility: hidden;
 }
 
+.submit {
+	grid-column: 1 / 2;
+	width: 230px;
+
+	border-top-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+}
+
 .label {
 	position: absolute;
 	left: 22.5px;
