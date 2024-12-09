@@ -22,8 +22,13 @@ function HomePage() {
 	const [pagesPerView, setPagesPerView] = useState(3);
 
 	const handleResize = () => {
+		if (window.innerWidth < 900) {
+			setPagesPerView(1);
+			return;
+		}
 		if (window.innerWidth < 1440) {
 			setPagesPerView(2);
+			return;
 		}
 		if (window.innerWidth > 1440) {
 			setPagesPerView(3);
@@ -89,11 +94,11 @@ function HomePage() {
 				</Heading>
 				<ul className={styles['ways']}>
 					<UsageItem
-						img='/mzmo-ams/Рисунок1.svg'
+						img='/mzmo-ams/Рисунок14.svg'
 						description='Диагностические лаборатории, в которых исследуют объекты биотической и абиотической природы, где идентифицируют возбудителей заболеваний, антигены и антитела'
 					></UsageItem>
 					<UsageItem
-						img='/mzmo-ams/Рисунок2.svg'
+						img='/mzmo-ams/Рисунок10.svg'
 						description='ПЦР-лаборатории'
 					></UsageItem>
 					<UsageItem

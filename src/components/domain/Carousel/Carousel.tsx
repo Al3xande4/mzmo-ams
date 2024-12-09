@@ -26,7 +26,7 @@ export function Carousel({
 
 	const windowElRef = useRef<HTMLDivElement>(null);
 
-	const [offset, setOffset] = useState(1);
+	const [offset, setOffset] = useState(-450);
 	const [width, setWidth] = useState(450);
 	const [transitionDuration, setTransitionDuration] =
 		useState(TRANSITION_DURITION);
@@ -63,13 +63,15 @@ export function Carousel({
 	useEffect(() => {
 		const resizeHandler = () => {
 			setWidth(() => {
-				if (!windowElRef.current) {
-					return 0;
+				if (
+					!windowElRef.current ||
+					windowElRef.current.offsetWidth == 0
+				) {
+					return 450;
 				}
 				return windowElRef.current.offsetWidth;
 			});
-			console.log((-clonesCount.head * width) / pagesPerView);
-			setOffset((-clonesCount.head * width) / pagesPerView);
+			setOffset(-(clonesCount.head * width) / pagesPerView);
 		};
 		resizeHandler();
 
@@ -77,13 +79,13 @@ export function Carousel({
 		return () => {
 			window.removeEventListener('resize', resizeHandler);
 		};
-	}, [clonesCount, width, windowElRef]);
+	}, [pagesPerView, clonesCount, width, windowElRef]);
 
 	useEffect(() => {
 		if (transitionDuration == 0) {
 			setTimeout(() => {
 				setTransitionDuration(TRANSITION_DURITION);
-			}, TRANSITION_DURITION);
+			}, TRANSITION_DURITION + 100);
 		}
 	}, [transitionDuration]);
 
@@ -113,7 +115,7 @@ export function Carousel({
 				setOffset(-(clonesCount.head * width) / pagesPerView);
 			}, TRANSITION_DURITION);
 		}
-	}, [offset, pages, width, clonesCount]);
+	}, [offset, pages, width, clonesCount, pagesPerView]);
 
 	const handleNext = () => {
 		setOffset((prev) => {
