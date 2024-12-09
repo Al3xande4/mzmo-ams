@@ -9,10 +9,9 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 
-	padding: 150px 146px;
-
-	padding-bottom: 133px;
-
+	padding: 120px 0;
+	align-items: center;
+	justify-content: center;
 }
 
 .footer .footer-title {
@@ -20,6 +19,10 @@
 	font-size: 30px;
 
 	margin-bottom: 30px;
+}
+
+.contacts {
+	justify-self: center;
 }
 
 .contact-info {
@@ -35,6 +38,10 @@
 .contact-info-bold {
 	font-weight: 500;
 	font-size: 18px;
+}
+
+.socials-block {
+	justify-self: center;
 }
 
 .socials {

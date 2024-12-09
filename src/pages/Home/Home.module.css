@@ -57,6 +57,11 @@
 	align-items: center;
 }
 
+.preview .preview-left-btn {
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
 .preview-text {
 	padding: 0 25px;
 	display: flex;
@@ -73,9 +78,17 @@
 	font-weight: 500;
 	line-height: 28px;
 	color: var(--light-color);
+
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+
+	transition: all;
+	transition-duration: 300ms;
 }
 .preview-text:hover {
 	cursor: pointer;
+
+	background-color: var(--primary-color);
 }
 
 .usage-section {
@@ -135,6 +148,7 @@
 
 .how-it-works img {
 	width: 100%;
+	border-radius: 18px;
 }
 
 .works-title {
@@ -330,12 +344,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	border-radius: 18px;
 }
 
 .carousel-page img{
 	height: 100%;
 
 	object-fit: cover;
+	border-radius: 18px;
 }
 
 .faq-inner {

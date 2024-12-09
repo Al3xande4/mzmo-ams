@@ -61,7 +61,12 @@ function HomePage() {
 							smooth
 							to={'#description'}
 						>
-							<Button size='large'>Как это работает</Button>
+							<Button
+								className={styles['preview-left-btn']}
+								size='large'
+							>
+								Как это работает
+							</Button>
 						</HashLink>
 						<HashLink
 							scroll={customScroll}
