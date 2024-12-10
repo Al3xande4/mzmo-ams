@@ -7,11 +7,20 @@
 
 .footer-inner {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr;
 
-	padding: 120px 0;
+	padding: 120px 20px;
 	align-items: center;
 	justify-content: center;
+	justify-items: center;
+}
+
+@media screen and (max-width: 550px){
+	.footer-inner {
+		grid-template-columns: 1fr;
+		justify-items: baseline;
+		padding-left: 40px;
+	}	
 }
 
 .footer .footer-title {
@@ -21,8 +30,13 @@
 	margin-bottom: 30px;
 }
 
-.contacts {
-	justify-self: center;
+.logo {
+	width: 80px;
+	height: 80px;
+}
+
+.info-link {
+	color: var(--primary-color);
 }
 
 .contact-info {
@@ -38,10 +52,6 @@
 .contact-info-bold {
 	font-weight: 500;
 	font-size: 18px;
-}
-
-.socials-block {
-	justify-self: center;
 }
 
 .socials {

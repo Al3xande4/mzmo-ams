@@ -1,0 +1,19 @@
+.img {
+	transition: all;
+	transition-duration: 300ms;
+	transition-timing-function: ease-in-out;
+
+	cursor: pointer;
+	object-fit: cover;
+
+	border-radius: 8px;
+}
+
+.modal-img {
+	border-radius: 8px;
+	max-width: 1040px;
+}
+
+.img:hover {
+	transform: scale(1.05);
+}

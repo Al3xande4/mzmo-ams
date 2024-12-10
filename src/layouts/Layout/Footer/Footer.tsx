@@ -10,6 +10,24 @@ export function Footer({ className, ...props }: FooterProps) {
 		<footer className={cn(className, styles.footer)}>
 			<Wrapper>
 				<div className={styles['footer-inner']}>
+					<div className={styles['info']}>
+						<img
+							className={styles['logo']}
+							alt='Логотип компании'
+							src='/mzmo-ams/logo.png'
+						></img>
+						<p className={styles['info-additional']}>
+							© ООО «МЗМО», 2002-2022
+							<br />
+							<a
+								className={styles['info-link']}
+								href='https://www.laminar.ru/#'
+								target='_blank'
+							>
+								Политика конфидециальности
+							</a>
+						</p>
+					</div>
 					<div className={styles['contacts']}>
 						<Heading className={styles['footer-title']} type='h3'>
 							Наши контакты

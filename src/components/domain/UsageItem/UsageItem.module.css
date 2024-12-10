@@ -7,6 +7,7 @@
 	padding: 25px;
 
 	position: relative;
+	border-radius: 8px;
 }
 
 .img:hover {
@@ -24,6 +25,8 @@
 
 .description {
 	width: 300px;
+	height: fit-content;
+
 	padding: 30px;
 	color: black;
 	background-color: white;
@@ -31,10 +34,9 @@
 	grid-row: 1 / -1;
 
 	position: absolute;
-	left: 20%;
-	bottom: 20%;
+	left: 15px;
+	top: 10px;
 
-	
 	opacity: 0;
 
 	transition: all;
@@ -47,6 +49,20 @@
 	box-shadow: 2px 2px 8px rgb(129, 129, 129);
 	text-align:justify;
 	z-index: -1;
+}
+
+
+
+@media screen and (max-width: 1170px) {
+	.description {
+		width: 250px;
+	}	
+}
+
+@media screen and (max-width: 600px) {
+	.description {
+		width: fit-content;
+	}	
 }
 
 .description.visible {

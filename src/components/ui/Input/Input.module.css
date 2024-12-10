@@ -2,6 +2,7 @@
 	border: 1px solid var(--secondary-color);
 	outline: none;
 	resize: none;
+	border-radius: 8px;
 
 	width: 100%;
 	padding: 16px 22.5px;
@@ -33,7 +34,7 @@
 }
 
 .input:focus::placeholder {
-	font-size: 8px;
+	font-size: 12px;
 	font-weight: 500;
 	line-height: 16px;
 

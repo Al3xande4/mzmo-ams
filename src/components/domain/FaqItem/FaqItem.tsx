@@ -4,8 +4,14 @@ import styles from './FaqItem.module.css';
 import { useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 
-export function FaqItem({ title, text }: FaqItemProps) {
+export function FaqItem({
+	title,
+	children,
+	className,
+	...props
+}: FaqItemProps) {
 	const [open, setOpen] = useState(false);
+	const [clicked, setClicked] = useState(false);
 	const ref = useRef<HTMLDivElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [height, setHeight] = useState(0);
@@ -15,7 +21,7 @@ export function FaqItem({ title, text }: FaqItemProps) {
 		if (ref.current) {
 			setHeight(ref.current.offsetHeight);
 		}
-	}, [ref.current]);
+	}, [ref.current, ref]);
 
 	useEffect(() => {
 		if (containerRef.current) {
@@ -23,17 +29,28 @@ export function FaqItem({ title, text }: FaqItemProps) {
 		}
 	}, [containerRef.current]);
 
+	useEffect(() => {
+		if (!clicked) {
+			setTimeout(() => {
+				setOpen(false);
+			}, 400);
+			return;
+		}
+		setOpen(true);
+	}, [clicked]);
+
 	const handleClick = () => {
-		setOpen((prev) => !prev);
+		setClicked((prev) => !prev);
 	};
 
 	return (
 		<div
 			ref={containerRef}
-			className={cn(styles.container, {
-				[styles.open]: open,
+			className={cn(className, styles.container, {
+				[styles.open]: clicked,
 			})}
 			style={open ? { height: `${containerHeight + height + 50}px` } : {}}
+			{...props}
 		>
 			<div className={styles.heading}>
 				<Heading className={styles.title} type='h2'>
@@ -49,10 +66,10 @@ export function FaqItem({ title, text }: FaqItemProps) {
 			</div>
 			<div
 				ref={ref}
-				style={open ? { top: `${height}px` } : {}}
+				style={clicked ? { top: `${containerHeight}px` } : {}}
 				className={styles.answer}
 			>
-				{text}
+				{children}
 			</div>
 		</div>
 	);
