@@ -1,12 +1,18 @@
 import { HeaderProps } from './Header.props';
 import cn from 'classnames';
 import styles from './Header.module.css';
-import { NavLink } from 'react-router-dom';
 import Button from '../../../components/ui/Button/Button';
 import { HashLink } from 'react-router-hash-link';
 import { customScroll } from '../../../helpers/scroll';
+import { useState } from 'react';
 
 function Header({ className }: HeaderProps) {
+	const [active, setActive] = useState(false);
+
+	const handleLinkClick = () => {
+		setActive(false);
+	};
+
 	return (
 		<header className={cn(className, styles.header)}>
 			<img
@@ -14,11 +20,15 @@ function Header({ className }: HeaderProps) {
 				alt='Логотип компании'
 				src='/mzmo-ams/МЗМО.svg'
 			/>
-			<div className={styles.menu}>
-				<img></img>
-			</div>
-			<nav className={styles.navigation}>
+			<nav
+				className={cn(styles.navigation, {
+					[styles.active]: active,
+				})}
+			>
 				<HashLink
+					onClick={() => {
+						handleLinkClick();
+					}}
 					smooth
 					to='#uos-ams'
 					scroll={(el) => {
@@ -30,6 +40,9 @@ function Header({ className }: HeaderProps) {
 				</HashLink>
 
 				<HashLink
+					onClick={() => {
+						handleLinkClick();
+					}}
 					smooth
 					to='#usage'
 					scroll={(el) => {
@@ -41,6 +54,9 @@ function Header({ className }: HeaderProps) {
 				</HashLink>
 
 				<HashLink
+					onClick={() => {
+						handleLinkClick();
+					}}
 					smooth
 					to='#description'
 					scroll={(el) => {
@@ -52,6 +68,9 @@ function Header({ className }: HeaderProps) {
 				</HashLink>
 
 				<HashLink
+					onClick={() => {
+						handleLinkClick();
+					}}
 					smooth
 					to='#requirements'
 					scroll={(el) => {
@@ -63,6 +82,9 @@ function Header({ className }: HeaderProps) {
 				</HashLink>
 
 				<HashLink
+					onClick={() => {
+						handleLinkClick();
+					}}
 					smooth
 					to='#ask-question'
 					scroll={(el) => {
@@ -74,6 +96,9 @@ function Header({ className }: HeaderProps) {
 				</HashLink>
 
 				<HashLink
+					onClick={() => {
+						handleLinkClick();
+					}}
 					smooth
 					to='#about-us'
 					scroll={(el) => {
@@ -85,6 +110,9 @@ function Header({ className }: HeaderProps) {
 				</HashLink>
 
 				<HashLink
+					onClick={() => {
+						handleLinkClick();
+					}}
 					smooth
 					to='#our-projects'
 					scroll={(el) => {
@@ -94,11 +122,38 @@ function Header({ className }: HeaderProps) {
 				>
 					Наши проекты
 				</HashLink>
+
+				<HashLink
+					className={cn(styles['nav-connect'])}
+					scroll={customScroll}
+					smooth
+					to={'#ask-question'}
+				>
+					<Button>Обратная связь</Button>
+				</HashLink>
 			</nav>
 
-			<HashLink scroll={customScroll} smooth to={'#ask-question'}>
-				<Button className={styles.connect}>Обратная связь</Button>
+			<HashLink
+				className={styles.connect}
+				scroll={customScroll}
+				smooth
+				to={'#ask-question'}
+			>
+				<Button>Обратная связь</Button>
 			</HashLink>
+
+			<div
+				className={cn(styles.menu, {
+					[styles.active]: active,
+				})}
+				onClick={() => {
+					setActive((prev) => !prev);
+				}}
+			>
+				<span className={styles.bar}></span>
+				<span className={styles.bar}></span>
+				<span className={styles.bar}></span>
+			</div>
 		</header>
 	);
 }

@@ -20,11 +20,24 @@
 	max-width: 100vw;
 }
 
-@media screen and (max-width: 1280px){
+@media screen and (max-width: 1330px){
 	.main {
-		margin-top: 200px;
+		margin-top: 30px;
 	}	
 }
+
+@media screen and (max-width: 980px){
+	.main {
+		margin-top: 80px;
+	}	
+}
+
+@media screen and (max-width: 768px){
+	.main {
+		margin-top: 0;
+	}	
+}
+
 
 .footer {
 	grid-area: footer;

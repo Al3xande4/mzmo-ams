@@ -4,6 +4,7 @@ import styles from './Layout.module.css';
 import { Footer } from './Footer/Footer';
 
 export function Layout() {
+
 	return (
 		<div className={styles.layout}>
 			<Header className={styles.header} />
