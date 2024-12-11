@@ -25,6 +25,11 @@
 
 	border-radius: 8px;
 }
+.secondary {
+	background-color: var(--secondary-color);
+	color: white;
+}
+
 
 .large {
 	padding: 16px 40px;
@@ -34,6 +39,10 @@
 .button:hover{
 	cursor: pointer;
 	background-color: var(--light-primary-color);
+}
+
+.secondary:hover {
+	background-color: #78a2cd;
 }
 
 .light {

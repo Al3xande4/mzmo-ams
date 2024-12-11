@@ -12,7 +12,7 @@ function Header({ className }: HeaderProps) {
 			<img
 				className={styles.logo}
 				alt='Логотип компании'
-				src='/mzmo-ams/logo.png'
+				src='/mzmo-ams/МЗМО.svg'
 			/>
 			<nav className={styles.navigation}>
 				<HashLink

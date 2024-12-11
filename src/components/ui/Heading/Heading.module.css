@@ -18,6 +18,30 @@
 	margin-bottom: 50px;
 }
 
+@media screen and (max-width: 530px) {
+	.h1 {
+		font-size: 35px;
+	}
+	.h2 {
+		font-size: 30px;
+	}
+	.h3 {
+		font-size: 22px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.h1 {
+		font-size: 30px;
+	}
+	.h2 {
+		font-size: 25px;
+	}
+	.h3 {
+		font-size: 20px;
+	}
+}
+
 .h3 {
 	color: white;
 	font-size: 24px;

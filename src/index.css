@@ -32,5 +32,6 @@ a{
 body {
   font-family: 'Space Grotesk', sans-serif;
   margin: 0;
+  anchor-name: --html;
 }
 

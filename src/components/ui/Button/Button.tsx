@@ -6,6 +6,7 @@ function Button({
 	className,
 	size = 'medium',
 	theme = 'dark',
+	color = 'primary',
 	children,
 	...props
 }: ButtonProps) {
@@ -16,6 +17,7 @@ function Button({
 				[styles.light]: theme == 'light',
 				[styles.small]: size == 'small',
 				[styles.large]: size == 'large',
+				[styles.secondary]: color == 'secondary',
 			})}
 		>
 			{children}

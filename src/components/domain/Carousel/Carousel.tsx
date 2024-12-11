@@ -142,16 +142,28 @@ export function Carousel({
 			value={{ width: width, pagesPerView: pagesPerView, spaceBetween }}
 		>
 			<div className={cn(className, styles.carousel)}>
-				<svg
-					className={styles.arrow}
-					onClick={() => {
-						handlePrev();
-					}}
-					xmlns='http://www.w3.org/2000/svg'
-					viewBox='0 0 33 33'
-				>
-					<path d='M19.7 17.2l-3.5 3.5c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l3.5-3.5c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4zm0 0c-.4.4-1 .4-1.4 0l-3.5-3.5c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0l3.5 3.5c.4.4.4 1 0 1.4zM16.5 2C8.5 2 2 8.5 2 16.5S8.5 31 16.5 31 31 24.5 31 16.5 24.5 2 16.5 2zm.5 31h-1C7.2 33 0 25.8 0 17v-1C0 7.2 7.2 0 16 0h1c8.8 0 16 7.2 16 16v1c0 8.8-7.2 16-16 16z' />
-				</svg>
+				<div className={styles.nav}>
+					<svg
+						className={styles.arrow}
+						onClick={() => {
+							handlePrev();
+						}}
+						xmlns='http://www.w3.org/2000/svg'
+						viewBox='0 0 33 33'
+					>
+						<path d='M19.7 17.2l-3.5 3.5c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l3.5-3.5c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4zm0 0c-.4.4-1 .4-1.4 0l-3.5-3.5c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0l3.5 3.5c.4.4.4 1 0 1.4zM16.5 2C8.5 2 2 8.5 2 16.5S8.5 31 16.5 31 31 24.5 31 16.5 24.5 2 16.5 2zm.5 31h-1C7.2 33 0 25.8 0 17v-1C0 7.2 7.2 0 16 0h1c8.8 0 16 7.2 16 16v1c0 8.8-7.2 16-16 16z' />
+					</svg>
+					<svg
+						className={styles.arrow}
+						onClick={() => {
+							handleNext();
+						}}
+						xmlns='http://www.w3.org/2000/svg'
+						viewBox='0 0 33 33'
+					>
+						<path d='M19.7 17.2l-3.5 3.5c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l3.5-3.5c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4zm0 0c-.4.4-1 .4-1.4 0l-3.5-3.5c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0l3.5 3.5c.4.4.4 1 0 1.4zM16.5 2C8.5 2 2 8.5 2 16.5S8.5 31 16.5 31 31 24.5 31 16.5 24.5 2 16.5 2zm.5 31h-1C7.2 33 0 25.8 0 17v-1C0 7.2 7.2 0 16 0h1c8.8 0 16 7.2 16 16v1c0 8.8-7.2 16-16 16z' />
+					</svg>
+				</div>
 				<div className={styles.window} ref={windowElRef}>
 					<div
 						className={styles['pages-container']}
@@ -163,17 +175,6 @@ export function Carousel({
 						{pages}
 					</div>
 				</div>
-
-				<svg
-					className={styles.arrow}
-					onClick={() => {
-						handleNext();
-					}}
-					xmlns='http://www.w3.org/2000/svg'
-					viewBox='0 0 33 33'
-				>
-					<path d='M19.7 17.2l-3.5 3.5c-.4.4-1 .4-1.4 0-.4-.4-.4-1 0-1.4l3.5-3.5c.4-.4 1-.4 1.4 0 .4.4.4 1 0 1.4zm0 0c-.4.4-1 .4-1.4 0l-3.5-3.5c-.4-.4-.4-1 0-1.4.4-.4 1-.4 1.4 0l3.5 3.5c.4.4.4 1 0 1.4zM16.5 2C8.5 2 2 8.5 2 16.5S8.5 31 16.5 31 31 24.5 31 16.5 24.5 2 16.5 2zm.5 31h-1C7.2 33 0 25.8 0 17v-1C0 7.2 7.2 0 16 0h1c8.8 0 16 7.2 16 16v1c0 8.8-7.2 16-16 16z' />
-				</svg>
 			</div>
 		</CarouselContext.Provider>
 	);

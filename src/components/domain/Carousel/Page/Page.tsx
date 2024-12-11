@@ -13,9 +13,17 @@ export function Page({ children, className }: PageProps) {
 		<div
 			className={cn(className, styles['page__main-container'])}
 			style={{
-				minWidth: `${Math.ceil(width / pagesPerView) - spaceBetween}px`,
-				marginRight: `${spaceBetween}px`,
-				maxWidth: `${Math.ceil(width / pagesPerView) - spaceBetween}px`,
+				minWidth: `${
+					Math.ceil(width / pagesPerView) -
+					spaceBetween * Math.min(1, pagesPerView - 1)
+				}px`,
+				marginRight: `${
+					spaceBetween * Math.min(1, pagesPerView - 1)
+				}px`,
+				maxWidth: `${
+					Math.ceil(width / pagesPerView) -
+					spaceBetween * Math.min(1, pagesPerView - 1)
+				}px`,
 			}}
 		>
 			{children}

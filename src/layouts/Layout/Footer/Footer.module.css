@@ -15,10 +15,21 @@
 	justify-items: center;
 }
 
+@media screen and (max-width: 930px){
+	.footer-inner {
+		grid-template-columns: 1fr 1fr;
+		justify-items: baseline;
+		gap: 40px;
+		padding-left: 40px;
+	}	
+}
+
+
 @media screen and (max-width: 550px){
 	.footer-inner {
 		grid-template-columns: 1fr;
 		justify-items: baseline;
+		gap: 40px;
 		padding-left: 40px;
 	}	
 }

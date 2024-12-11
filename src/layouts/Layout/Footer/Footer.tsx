@@ -14,7 +14,7 @@ export function Footer({ className, ...props }: FooterProps) {
 						<img
 							className={styles['logo']}
 							alt='Логотип компании'
-							src='/mzmo-ams/logo.png'
+							src='/mzmo-ams/МЗМО.svg'
 						></img>
 						<p className={styles['info-additional']}>
 							© ООО «МЗМО», 2002-2022

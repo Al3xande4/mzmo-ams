@@ -11,9 +11,14 @@ import { FaqItem } from '../../components/domain/FaqItem/FaqItem';
 import { useEffect, useState } from 'react';
 import { ContactForm } from '../../components/domain/ContactForm/ContactForm';
 import { Image } from '../../components/ui/Image/Image';
+import { Modal } from '../../components/ui/Modal/Modal';
 
 function HomePage() {
 	const [pagesPerView, setPagesPerView] = useState(3);
+	const [previewHidden, setPreviewHidden] = useState(true);
+
+	const [promoActive, setPromoActive] = useState(false);
+	const [alreadyScrolled, setAlreadyScrolled] = useState(false);
 
 	const handleResize = () => {
 		if (window.innerWidth < 900) {
@@ -28,11 +33,27 @@ function HomePage() {
 			setPagesPerView(3);
 		}
 	};
+
 	useEffect(() => {
 		handleResize();
+		const handleScroll = () => {
+			const { scrollTop, scrollHeight, clientHeight } =
+				document.documentElement;
+
+			// Check if the user has scrolled to the bottom
+			if (
+				scrollTop + clientHeight >= scrollHeight - 5 &&
+				!alreadyScrolled
+			) {
+			}
+		};
+
 		window.addEventListener('resize', handleResize);
+		window.addEventListener('scroll', handleScroll);
+
 		return () => {
 			window.removeEventListener('resize', handleResize);
+			window.removeEventListener('scroll', handleScroll);
 		};
 	}, []);
 
@@ -52,13 +73,23 @@ function HomePage() {
 							100% безопастность для персонала и окружающей среды
 						</p>
 						<div className={styles['preview-actions']}>
+							<Button
+								color='secondary'
+								size='large'
+								className={styles['preview-left-btn']}
+								onClick={() => {
+									setPreviewHidden((prev) => !prev);
+								}}
+							>
+								Что это?
+							</Button>
 							<HashLink
 								scroll={customScroll}
 								smooth
 								to={'#description'}
 							>
 								<Button
-									className={styles['preview-left-btn']}
+									className={styles['preview-middle-btn']}
 									size='large'
 								>
 									Как это работает
@@ -70,8 +101,28 @@ function HomePage() {
 								to={'#ask-question'}
 								className={styles['preview-text']}
 							>
-								получить КП
+								Получить коммерческое предложение
 							</HashLink>
+						</div>
+						<div
+							className={classNames(styles['preview-desc'], {
+								[styles['hidden']]: previewHidden,
+							})}
+						>
+							<img
+								className={styles['close-btn']}
+								src='/mzmo-ams/close.svg'
+								onClick={() => {
+									setPreviewHidden(true);
+								}}
+							></img>
+							УОС-АМС - это автоматизированная установка для
+							непрерывного термического обеззараживания сточных
+							вод, содержащих биологические агенты I-IV групп
+							патогенности. Установка работает по принципу
+							непрерывного протока, обеспечивая 100% уничтожение
+							патогенных микроорганизмов и полное соответствие
+							нормативным требованиям
 						</div>
 					</div>
 					<div className={styles['preview-images']}>
@@ -181,15 +232,6 @@ function HomePage() {
 							>
 								Что такое УОС-АМС и как это работает
 							</Heading>
-							<p className={styles['works-desc']}>
-								УОС-АМС - это автоматизированная установка для
-								непрерывного термического обеззараживания
-								сточных вод, содержащих биологические агенты
-								I-IV групп патогенности. Установка работает по
-								принципу непрерывного протока, обеспечивая 100%
-								уничтожение патогенных микроорганизмов и полное
-								соответствие нормативным требованиям
-							</p>
 							<Heading
 								className={styles['advantages-title']}
 								type='h3'
@@ -207,7 +249,7 @@ function HomePage() {
 										Обеспечивает соответствие нормативным
 										требованиям: Гарантирует соблюдение
 										СанПиН 3.3686-21 и СП 2.1.3678-20,
-										предотвращая штрафы и санкции.
+										предотвращая штрафы и санкции
 									</p>
 								</li>
 								<li className={styles['advantages-item']}>
@@ -220,7 +262,7 @@ function HomePage() {
 										Обеспечивает безопасность: Исключает
 										риск распространения инфекций через
 										сточные воды, защищая персонал,
-										пациентов и окружающую среду.
+										пациентов и окружающую среду
 									</p>
 								</li>
 								<li className={styles['advantages-item']}>
@@ -234,7 +276,7 @@ function HomePage() {
 										Минимизирует человеческий фактор,
 										упрощает обслуживание и предоставляет
 										возможность удаленного управления и
-										мониторинга параметров.
+										мониторинга параметров
 									</p>
 								</li>
 								<li className={styles['advantages-item']}>
@@ -245,7 +287,7 @@ function HomePage() {
 									></img>
 									<p className={styles['advantage-text']}>
 										Оптимизирует бюджет: Стоимость УОС-АМС
-										на 30% ниже зарубежных аналогов.
+										на 30% ниже зарубежных аналогов
 									</p>
 								</li>
 								<li className={styles['advantages-item']}>
@@ -256,7 +298,7 @@ function HomePage() {
 									></img>
 									<p className={styles['advantage-text']}>
 										Обеспечивает надежность и долговечность:
-										Эксплуатационный срок службы 8 лет.
+										Эксплуатационный срок службы 8 лет
 									</p>
 								</li>
 							</ul>
@@ -275,6 +317,7 @@ function HomePage() {
 							Обязательные требования к системам обеззараживания
 							сточных вод
 						</Heading>
+
 						<ul className={styles['requirements-list']}>
 							<li className={styles['requirements-item']}>
 								<UsageItem
@@ -373,9 +416,14 @@ function HomePage() {
 								/>
 							</li>
 						</ul>
-						<Button className={styles['check-list-btn']}>
-							Скачать чек лист
-						</Button>
+						<a
+							href='/mzmo-ams/ДС ЕАЭС N RU Д-RU.РА10.В.65068_23 УОС-1.pdf'
+							download={'Чек лист'}
+						>
+							<Button className={styles['check-list-btn']}>
+								Скачать чек лист
+							</Button>
+						</a>
 					</div>
 				</Wrapper>
 			</section>
@@ -395,9 +443,9 @@ function HomePage() {
 								className={styles['question-title']}
 								type='h2'
 							>
-								Подберите оптимальное решение онлайн и
-								получистее коммерческое предложение в течении 3
-								часов + скидку к договору 4%
+								Подберите оптимальное решение онлайн и получите
+								коммерческое предложение в течении 3 часов +
+								скидку к договору 4%
 							</Heading>
 
 							<ContactForm />
@@ -579,23 +627,25 @@ function HomePage() {
 				</Wrapper>
 			</section>
 
-			<section className={styles['additional-council']}>
-				<Heading
-					className={styles['additional-council-title']}
-					type='h2'
-				>
-					Получите персональную консультацию + расчет сметы в 3-х
-					вариантах + скидку к договору 4%
-				</Heading>
-				<Image
-					modal={true}
-					className={styles['additional-council-img']}
-					src='/mzmo-ams/model (1).jpg'
-				/>
-				<Button className={styles['additional-council-btn']}>
-					Получить!
-				</Button>
-			</section>
+			<Modal active={promoActive} setModalActive={setPromoActive}>
+				<section className={styles['additional-council']}>
+					<Heading
+						className={styles['additional-council-title']}
+						type='h2'
+					>
+						Получите персональную консультацию + расчет сметы в 3-х
+						вариантах + скидку к договору 4%
+					</Heading>
+					<Image
+						modal={true}
+						className={styles['additional-council-img']}
+						src='/mzmo-ams/model (1).jpg'
+					/>
+					<Button className={styles['additional-council-btn']}>
+						Получить!
+					</Button>
+				</section>
+			</Modal>
 		</div>
 	);
 }
