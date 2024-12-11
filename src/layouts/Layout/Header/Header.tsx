@@ -14,6 +14,9 @@ function Header({ className }: HeaderProps) {
 				alt='Логотип компании'
 				src='/mzmo-ams/МЗМО.svg'
 			/>
+			<div className={styles.menu}>
+				<img></img>
+			</div>
 			<nav className={styles.navigation}>
 				<HashLink
 					smooth

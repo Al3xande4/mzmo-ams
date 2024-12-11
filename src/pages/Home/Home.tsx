@@ -17,9 +17,6 @@ function HomePage() {
 	const [pagesPerView, setPagesPerView] = useState(3);
 	const [previewHidden, setPreviewHidden] = useState(true);
 
-	const [promoActive, setPromoActive] = useState(false);
-	const [alreadyScrolled, setAlreadyScrolled] = useState(false);
-
 	const handleResize = () => {
 		if (window.innerWidth < 900) {
 			setPagesPerView(1);
@@ -36,24 +33,11 @@ function HomePage() {
 
 	useEffect(() => {
 		handleResize();
-		const handleScroll = () => {
-			const { scrollTop, scrollHeight, clientHeight } =
-				document.documentElement;
-
-			// Check if the user has scrolled to the bottom
-			if (
-				scrollTop + clientHeight >= scrollHeight - 5 &&
-				!alreadyScrolled
-			) {
-			}
-		};
 
 		window.addEventListener('resize', handleResize);
-		window.addEventListener('scroll', handleScroll);
 
 		return () => {
 			window.removeEventListener('resize', handleResize);
-			window.removeEventListener('scroll', handleScroll);
 		};
 	}, []);
 
@@ -627,25 +611,23 @@ function HomePage() {
 				</Wrapper>
 			</section>
 
-			<Modal active={promoActive} setModalActive={setPromoActive}>
-				<section className={styles['additional-council']}>
-					<Heading
-						className={styles['additional-council-title']}
-						type='h2'
-					>
-						Получите персональную консультацию + расчет сметы в 3-х
-						вариантах + скидку к договору 4%
-					</Heading>
-					<Image
-						modal={true}
-						className={styles['additional-council-img']}
-						src='/mzmo-ams/model (1).jpg'
-					/>
-					<Button className={styles['additional-council-btn']}>
-						Получить!
-					</Button>
-				</section>
-			</Modal>
+			<section className={styles['additional-council']}>
+				<Heading
+					className={styles['additional-council-title']}
+					type='h2'
+				>
+					Получите персональную консультацию + расчет сметы в 3-х
+					вариантах + скидку к договору 4%
+				</Heading>
+				<Image
+					modal={true}
+					className={styles['additional-council-img']}
+					src='/mzmo-ams/model (1).jpg'
+				/>
+				<Button className={styles['additional-council-btn']}>
+					Получить!
+				</Button>
+			</section>
 		</div>
 	);
 }
