@@ -5,9 +5,11 @@ import Button from '../../../components/ui/Button/Button';
 import { HashLink } from 'react-router-hash-link';
 import { customScroll } from '../../../helpers/scroll';
 import { useState } from 'react';
+import { Offer } from '../../../components/domain/Offer/Offer';
 
 function Header({ className }: HeaderProps) {
 	const [active, setActive] = useState(false);
+	const [offerActive, setOfferActive] = useState(false);
 
 	const handleLinkClick = () => {
 		setActive(false);
@@ -15,6 +17,7 @@ function Header({ className }: HeaderProps) {
 
 	return (
 		<header className={cn(className, styles.header)}>
+			<Offer setOpen={setOfferActive} open={offerActive}></Offer>
 			<img
 				className={styles.logo}
 				alt='Логотип компании'
@@ -122,25 +125,16 @@ function Header({ className }: HeaderProps) {
 				>
 					Наши проекты
 				</HashLink>
-
-				<HashLink
-					className={cn(styles['nav-connect'])}
-					scroll={customScroll}
-					smooth
-					to={'#ask-question'}
-				>
-					<Button>Обратная связь</Button>
-				</HashLink>
 			</nav>
 
-			<HashLink
+			<div
 				className={styles.connect}
-				scroll={customScroll}
-				smooth
-				to={'#ask-question'}
+				onClick={() => {
+					setOfferActive(true);
+				}}
 			>
 				<Button>Обратная связь</Button>
-			</HashLink>
+			</div>
 
 			<div
 				className={cn(styles.menu, {

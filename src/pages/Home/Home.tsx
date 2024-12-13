@@ -11,11 +11,12 @@ import { FaqItem } from '../../components/domain/FaqItem/FaqItem';
 import { useEffect, useState } from 'react';
 import { ContactForm } from '../../components/domain/ContactForm/ContactForm';
 import { Image } from '../../components/ui/Image/Image';
-import { Modal } from '../../components/ui/Modal/Modal';
+import { Quiz } from '../../components/domain/Quiz/Quiz';
+import { Offer } from '../../components/domain/Offer/Offer';
 
 function HomePage() {
 	const [pagesPerView, setPagesPerView] = useState(3);
-	const [previewHidden, setPreviewHidden] = useState(true);
+	const [offerActive, setOfferActive] = useState(false);
 
 	const handleResize = () => {
 		if (window.innerWidth < 900) {
@@ -43,6 +44,7 @@ function HomePage() {
 
 	return (
 		<div className={styles.page}>
+			<Offer setOpen={setOfferActive} open={offerActive}></Offer>
 			<Wrapper>
 				<section className={styles.preview}>
 					<div className={styles['preview-info']}>
@@ -56,17 +58,21 @@ function HomePage() {
 						<p className={styles['subtitle']}>
 							100% безопастность для персонала и окружающей среды
 						</p>
+						<ul className={styles['preview-list']}>
+							<li className={styles['preview-item']}>
+								Под ключ: от проектирования до ввода в
+								эксплуатацию
+							</li>
+							<li className={styles['preview-item']}>
+								Простота в управлении: полностью
+								автоматизированный процесс
+							</li>
+							<li className={styles['preview-item']}>
+								Поддержка 24/7: обучение, гарантия, сервис +
+								удаленный мониторинг
+							</li>
+						</ul>
 						<div className={styles['preview-actions']}>
-							<Button
-								color='secondary'
-								size='large'
-								className={styles['preview-left-btn']}
-								onClick={() => {
-									setPreviewHidden((prev) => !prev);
-								}}
-							>
-								Что это?
-							</Button>
 							<HashLink
 								scroll={customScroll}
 								smooth
@@ -79,34 +85,14 @@ function HomePage() {
 									Как это работает
 								</Button>
 							</HashLink>
-							<HashLink
-								scroll={customScroll}
-								smooth
-								to={'#ask-question'}
+							<div
 								className={styles['preview-text']}
+								onClick={() => {
+									setOfferActive(true);
+								}}
 							>
 								Получить коммерческое предложение
-							</HashLink>
-						</div>
-						<div
-							className={classNames(styles['preview-desc'], {
-								[styles['hidden']]: previewHidden,
-							})}
-						>
-							<img
-								className={styles['close-btn']}
-								src='/mzmo-ams/close.svg'
-								onClick={() => {
-									setPreviewHidden(true);
-								}}
-							></img>
-							УОС-АМС - это автоматизированная установка для
-							непрерывного термического обеззараживания сточных
-							вод, содержащих биологические агенты I-IV групп
-							патогенности. Установка работает по принципу
-							непрерывного протока, обеспечивая 100% уничтожение
-							патогенных микроорганизмов и полное соответствие
-							нормативным требованиям
+							</div>
 						</div>
 					</div>
 					<div className={styles['preview-images']}>
@@ -141,81 +127,158 @@ function HomePage() {
 					Направления применения
 				</Heading>
 				<ul className={styles['ways']}>
-					<UsageItem
-						img='/mzmo-ams/Рисунок8.svg'
-						description='Диагностические, ПЦР, экспериментальные, зоолого-энтомологические лаборатории'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/Рисунок15.svg'
-						description='Лаборатории по производству иммунобиологических лекарств'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/vet.svg'
-						description='Ветеринарные учреждения.'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/hospital.svg'
-						description='Инфекционные больницы и больничные отделения'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/Рисунок9.svg'
-						description='Пищевая промышленность'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/morgue.svg'
-						description='Патологоанатомические учреждения по вскрытию трупов
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/Рисунок8.svg'
+							description='Диагностические, ПЦР, экспериментальные, зоолого-энтомологические лаборатории'
+						></UsageItem>
+						Лаборатории
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/Рисунок15.svg'
+							description='Лаборатории по производству иммунобиологических лекарств'
+						></UsageItem>
+						Биотехнологии
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/vet.svg'
+							description='Ветеринарные учреждения.'
+						></UsageItem>
+						Ветеринария
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/hospital.svg'
+							description='Инфекционные больницы и больничные отделения'
+						></UsageItem>
+						Здравоохранение
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/Рисунок9.svg'
+							description='Пищевая промышленность'
+						></UsageItem>
+						Пищевая промышленность
+					</li>
+
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/morgue.svg'
+							description='Патологоанатомические учреждения по вскрытию трупов
 людей и животных.'
-					></UsageItem>
+						></UsageItem>
+						Патология
+					</li>
 				</ul>
 				<Heading className={styles['usage-title']} type='h3'>
-					Целевая аудитория
+					Для кого разработана технология
 				</Heading>
+
 				<ul className={styles['ways']}>
-					<UsageItem
-						img='/mzmo-ams/Рисунок7.svg'
-						description='Исследовательские центры и производства, занимающиеся
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/Рисунок7.svg'
+							description='Исследовательские центры и производства, занимающиеся
 вирусологией, бактериологией, эпидемиологией, биотехнологией, генной инженерией, производством вакцин и сывороток.'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/Рисунок6.svg'
-						description='Микробиологические лаборатории контроля качества продуктов'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/Рисунок11.svg'
-						description='Диагностические лаборатории, в которых исследуют объекты биотической и абиотической природы, где идентифицируют возбудителей заболеваний, антигены и антитела.'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/lab-worker.svg'
-						description='Лаборатории по производству иммунобиологических
+						></UsageItem>
+						Исследовательские институты
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/Рисунок6.svg'
+							description='Микробиологические лаборатории контроля качества продуктов'
+						></UsageItem>
+						Точная механика
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/Рисунок11.svg'
+							description='Диагностические лаборатории, в которых исследуют объекты биотической и абиотической природы, где идентифицируют возбудителей заболеваний, антигены и антитела.'
+						></UsageItem>
+						Микроэлектроника
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/lab-worker.svg'
+							description='Лаборатории по производству иммунобиологических
 лекарств с применением микроорганизмов и продуктов,
 полученных в результате микробиологического синтеза.'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/Рисунок17.svg'
-						description='Полностью автоматизированный процесс - условие максимальной уверенности, защиты персонала и окружающей
+						></UsageItem>
+						Фармацевтика
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/Рисунок17.svg'
+							description='Полностью автоматизированный процесс - условие максимальной уверенности, защиты персонала и окружающей
 среды.'
-					></UsageItem>
-					<UsageItem
-						img='/mzmo-ams/flask.svg'
-						description='Лаборатории с уровнем опасности BSL2-3-4'
-					></UsageItem>
+						></UsageItem>
+						Приборостроение
+					</li>
+					<li className={styles['usage-item']}>
+						<UsageItem
+							img='/mzmo-ams/flask.svg'
+							description='Лаборатории с уровнем опасности BSL2-3-4'
+						></UsageItem>
+						Лаборатории BSL2-3-4
+					</li>
 				</ul>
 			</section>
 			<section id='description' className={styles['how-it-works']}>
 				<Wrapper>
+					<Heading className={styles['works-title']} type='h2'>
+						Что такое УОС-АМС и как это работает
+					</Heading>
+					<div className={styles['works-description']}>
+						УОС-АМС - это автоматизированная установка для
+						непрерывного термического обеззараживания сточных вод,
+						содержащих биологические агенты I-IV групп патогенности.
+						Установка работает по принципу непрерывного протока,
+						обеспечивая 100% уничтожение патогенных микроорганизмов
+						и полное соответствие нормативным требованиям.
+					</div>
 					<div className={styles['how-it-works-container']}>
-						<Image
-							modal={true}
-							className={styles['how-it-works-img']}
-							src='/mzmo-ams/draft.png'
-						/>
 						<div className={styles['works-info']}>
 							<Heading
-								className={styles['works-title']}
-								type='h2'
+								className={styles['advantages-title']}
+								type='h3'
 							>
-								Что такое УОС-АМС и как это работает
+								Принцип работы
 							</Heading>
+							<ol className={styles['works-list']}>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Установка подключается к системе
+										канализации, собирающей сточные воды из
+										"заразной" зоны
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Сточные воды накапливаются в баке,
+										проходят фильтрацию и подаются в систему
+										термической обработки
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										После достижения заданной температуры и
+										времени выдержки, обработанные стоки
+										охлаждаются и сбрасываются в общую
+										систему канализации.
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Процесс полностью автоматизирован и
+										контролируется с помощью удаленной
+										системы управления.
+									</p>
+								</li>
+							</ol>
+						</div>
+						<div className={styles['works-info']}>
 							<Heading
 								className={styles['advantages-title']}
 								type='h3'
@@ -298,8 +361,8 @@ function HomePage() {
 							className={styles['requirements-title']}
 							type='h2'
 						>
-							Обязательные требования к системам обеззараживания
-							сточных вод
+							7 обязательных требований к системам обеззараживания
+							сточных вод + нормативные документы СанПиН и СП
 						</Heading>
 
 						<ul className={styles['requirements-list']}>
@@ -400,20 +463,67 @@ function HomePage() {
 								/>
 							</li>
 						</ul>
-						<a
-							href='/mzmo-ams/ДС ЕАЭС N RU Д-RU.РА10.В.65068_23 УОС-1.pdf'
-							download={'Чек лист'}
-						>
-							<Button className={styles['check-list-btn']}>
-								Скачать чек лист
-							</Button>
-						</a>
+						<div className={styles['checklist-container']}>
+							<div className={styles['checklist-info']}>
+								<Heading type='h3'>
+									Скачайте бесплатно наш чек-лист, чтобы:
+								</Heading>
+								<ul className={styles['checklist-list']}>
+									<li className={styles['checklist-item']}>
+										Узнать о ключевых требованиях: 7
+										обязательных норм для систем
+										обеззараживания сточных вод.
+									</li>
+									<li className={styles['checklist-item']}>
+										Доступ к нормативам: Ссылки на
+										актуальные СанПиН и СП.
+									</li>
+									<li className={styles['checklist-item']}>
+										Проведите самоаудит: оцените
+										соответствие вашей системы требованиям и
+										выявите недостатки.
+									</li>
+									<li className={styles['checklist-item']}>
+										Повысить безопасность: Обеспечьте
+										соблюдение норм и защиту окружающей
+										среды.
+									</li>
+								</ul>
+								<a
+									href='/mzmo-ams/ДС ЕАЭС N RU Д-RU.РА10.В.65068_23 УОС-1.pdf'
+									download={'Чек лист'}
+								>
+									<Button
+										className={styles['check-list-btn']}
+									>
+										Скачать чек лист
+									</Button>
+								</a>
+							</div>
+							<img
+								src='/mzmo-ams/mockup.webp'
+								className={styles['check-list-preview']}
+							></img>
+						</div>
 					</div>
 				</Wrapper>
 			</section>
 
 			<section id='ask-question' className={styles['questions']}>
 				<Wrapper>
+					<Quiz
+						questions={[
+							{
+								question:
+									'Какой примерный объем сточных вод нужно обрабатывать?',
+								choices: ['30', '50', '100'],
+							},
+							{
+								question: 'Нужна ли автоматизация процесса?',
+								choices: ['Да', 'Нет'],
+							},
+						]}
+					/>
 					<div className={styles['questions-inner']}>
 						<div className={styles['question-img-wrapper']}>
 							<img
@@ -443,11 +553,10 @@ function HomePage() {
 					<div className={styles['about-us-inner']}>
 						<Heading className={styles['about-us-title']} type='h2'>
 							Кто мы?
-						</Heading>
-						<p className={styles['about-us-subtitle']}>
-							И почему 9 из 10 клиентов выбирают прямого
+							<br /> И почему 9 из 10 клиентов выбирают прямого
 							производителя
-						</p>
+						</Heading>
+						<p className={styles['about-us-subtitle']}></p>
 						<p className={styles['about-us-info']}>
 							АМС-МЗМО - Ваш партнер в создании чистой среды и
 							ведущий российский разработчик, производитель
@@ -492,7 +601,7 @@ function HomePage() {
 								<span className={styles['about-us-item-title']}>
 									650
 								</span>
-								НОМЕНКЛАТУРНЫЙ РЯД
+								СПЕЦИАЛИСТОВ
 							</li>
 						</ul>
 					</div>

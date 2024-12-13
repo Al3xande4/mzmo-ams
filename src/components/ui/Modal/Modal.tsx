@@ -8,12 +8,14 @@ export function Modal({
 	className,
 	active,
 	setModalActive,
+	...props
 }: ModalProps) {
 	return (
 		<div
 			className={cn(className, styles.modal, {
 				[styles.hidden]: !active,
 			})}
+			{...props}
 		>
 			<div className={styles['modal-inner']}>
 				<img

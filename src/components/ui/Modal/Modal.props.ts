@@ -1,8 +1,6 @@
-import { ReactNode } from 'react';
+import { HtmlHTMLAttributes, ReactNode } from 'react';
 
-export interface ModalProps {
-	children?: ReactNode;
-	className?: string;
+export interface ModalProps extends HtmlHTMLAttributes<HTMLDivElement> {
 	hidden?: boolean;
 	setModalActive: (active: boolean) => void;
 	active: boolean;

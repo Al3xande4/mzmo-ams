@@ -6,9 +6,7 @@ import { CarouselContext } from '../Carousel.context';
 
 export function Page({ children, className }: PageProps) {
 	const { width, pagesPerView, spaceBetween } = useContext(CarouselContext);
-	useEffect(() => {
-		console.log(width);
-	}, [width]);
+
 	return (
 		<div
 			className={cn(className, styles['page__main-container'])}

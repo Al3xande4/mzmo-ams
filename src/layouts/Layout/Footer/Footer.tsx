@@ -35,13 +35,13 @@ export function Footer({ className, ...props }: FooterProps) {
 						<p className={styles['contact-info']}>
 							Номер телефона:{' '}
 							<span className={styles['contact-info-bold']}>
-								+793213219321
+								+88002018204
 							</span>
 						</p>
 						<p className={styles['contact-info']}>
 							Email:{' '}
 							<span className={styles['contact-info-bold']}>
-								mzmo-ams@gmail.com
+								laminar@laminar.ru
 							</span>
 						</p>
 					</div>

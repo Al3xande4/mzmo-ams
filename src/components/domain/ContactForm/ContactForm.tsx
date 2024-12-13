@@ -1,20 +1,21 @@
 import { ContactFormProps } from './ContactForm.props';
 import styles from './ContactForm.module.css';
 import { Input } from '../../ui/Input/Input';
-import { Textarea } from '../../ui/Textarea/Textarea';
 import Button from '../../ui/Button/Button';
 import cn from 'classnames';
 import { useState } from 'react';
 
 export function ContactForm({ className, ...props }: ContactFormProps) {
 	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
+	const [phone, setPhone] = useState('');
 	const [email, setEmail] = useState('');
 	const [question1, setQuestion1] = useState('');
 	const [question2, setQuestion2] = useState('');
 	const [question3, setQuestion3] = useState('');
 	const [question4, setQuestion4] = useState('');
 	const [question5, setQuestion5] = useState('');
+
+	const sendEmail = () => {};
 
 	return (
 		<form
@@ -46,20 +47,20 @@ export function ContactForm({ className, ...props }: ContactFormProps) {
 				<fieldset className={styles.fieldset}>
 					<label
 						className={cn(styles.label, {
-							[styles.hidden]: !lastName,
+							[styles.hidden]: !phone,
 						})}
-						htmlFor='last-name'
+						htmlFor='phone'
 					>
 						Номер телефона
 					</label>
 					<Input
-						name='last name'
-						id='last-name'
+						name='phone'
+						id='phone'
 						placeholder='Номер телефона'
 						required
-						value={lastName}
+						value={phone}
 						onChange={(e) => {
-							setLastName(e.target.value);
+							setPhone(e.target.value);
 						}}
 					/>
 				</fieldset>
@@ -198,7 +199,14 @@ export function ContactForm({ className, ...props }: ContactFormProps) {
 					></Input>
 				</fieldset>
 			</div>
-			<Button className={styles['submit']} type='submit'>
+			<Button
+				onClick={(e) => {
+					e.preventDefault();
+					sendEmail();
+				}}
+				className={styles['submit']}
+				type='submit'
+			>
 				Отправить
 			</Button>
 		</form>

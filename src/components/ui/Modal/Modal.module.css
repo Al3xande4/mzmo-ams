@@ -17,6 +17,8 @@
 
 
 .modal-inner {
+    width: fit-content;
+    margin: 0 auto;
 	z-index: 10;
     padding: 100px;
     position: relative;
