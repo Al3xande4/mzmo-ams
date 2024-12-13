@@ -47,9 +47,6 @@ export function Footer({ className, ...props }: FooterProps) {
 					</div>
 
 					<div className={styles['socials-block']}>
-						<Heading className={styles['footer-title']} type='h3'>
-							Соц сети
-						</Heading>
 						<ul className={styles.socials}>
 							<a href=''>
 								<Button size='small'>
@@ -59,13 +56,7 @@ export function Footer({ className, ...props }: FooterProps) {
 
 							<a href=''>
 								<Button size='small'>
-									<img src='/mzmo-ams/instagram.svg'></img>
-								</Button>
-							</a>
-
-							<a href=''>
-								<Button size='small'>
-									<img src='/mzmo-ams/X.svg'></img>
+									<img src='https://static.rutube.ru/static/img/favicon-icons/v3/favicon.ico'></img>
 								</Button>
 							</a>
 						</ul>

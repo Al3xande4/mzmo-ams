@@ -4,6 +4,7 @@ import { Input } from '../../ui/Input/Input';
 import Button from '../../ui/Button/Button';
 import cn from 'classnames';
 import { useState } from 'react';
+import { sendForm } from '@emailjs/browser';
 
 export function ContactForm({
 	quizAnswers,
@@ -17,7 +18,20 @@ export function ContactForm({
 	const [email, setEmail] = useState('');
 	const [emailError, setEmailError] = useState(false);
 
-	const sendEmail = () => {};
+	const sendEmail = () => {
+		sendForm(
+			'service_h334iaa',
+			'template_0sdlf1e',
+			`${firstName}\n${phone}\n${email}`
+		).then(
+			(response) => {
+				console.log(response);
+			},
+			(error) => {
+				console.error(error);
+			}
+		);
+	};
 
 	return (
 		<form

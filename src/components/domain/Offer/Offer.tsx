@@ -6,13 +6,28 @@ import { OfferProps } from './Offer.props';
 import styles from './Offer.module.css';
 import { Modal } from '../../ui/Modal/Modal';
 import { Heading } from '../../ui/Heading/Heading';
+import { init, send, sendForm } from '@emailjs/browser';
 
 export function Offer({ open, setOpen, className, ...props }: OfferProps) {
 	const [name, setName] = useState('');
 	const [phone, setPhone] = useState('');
 	const [email, setEmail] = useState('');
 
-	const sendEmail = () => {};
+	const sendEmail = () => {
+		init({ publicKey: '_hm22IqZ9qAQZM1XS' });
+		send('service_h334iaa', 'template_0sdlf1e', {
+			name: name,
+			phone: phone,
+			email: email,
+		}).then(
+			(response) => {
+				console.log(response);
+			},
+			(error) => {
+				console.error(error);
+			}
+		);
+	};
 
 	return (
 		<Modal active={open} setModalActive={setOpen}>
@@ -86,6 +101,16 @@ export function Offer({ open, setOpen, className, ...props }: OfferProps) {
 								}}
 							/>
 						</fieldset>
+					</div>
+					<div>
+						<input
+							id='policy'
+							name='policy'
+							type='checkbox'
+						></input>
+						<label htmlFor='policy'>
+							Согласен(а) с политикой конфиденциальности
+						</label>
 					</div>
 					<Button
 						onClick={(e) => {

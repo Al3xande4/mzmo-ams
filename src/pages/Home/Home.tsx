@@ -14,6 +14,8 @@ import { Image } from '../../components/ui/Image/Image';
 import { Quiz } from '../../components/domain/Quiz/Quiz';
 import { Offer } from '../../components/domain/Offer/Offer';
 import { QuizItem } from '../../components/domain/Quiz/Quiz.props';
+import { Consult } from '../../components/domain/Consult/Consult';
+import { Modal } from '../../components/ui/Modal/Modal';
 
 const questions: QuizItem[] = [
 	{
@@ -41,10 +43,13 @@ const questions: QuizItem[] = [
 
 function HomePage() {
 	const [pagesPerView, setPagesPerView] = useState(3);
+	const [pagesPerViewSmall, setPagesPerViewSmall] = useState(3);
 	const [offerActive, setOfferActive] = useState(false);
+	const [consultActive, setConsultActive] = useState(false);
 	const [quizActive, setQuizActive] = useState(true);
 	const [quizAnswers, setQuizAnswers] = useState<number[]>();
 	const [quizTextAnswers, setQuizTextAnswers] = useState<string[]>();
+	const [videoActive, setVideoActive] = useState(false);
 
 	useEffect(() => {
 		if (!quizAnswers) {
@@ -59,14 +64,22 @@ function HomePage() {
 
 	const handleResize = () => {
 		if (window.innerWidth < 900) {
+			setPagesPerViewSmall(1);
 			setPagesPerView(1);
 			return;
 		}
+		if (window.innerWidth < 1250) {
+			setPagesPerViewSmall(1);
+			setPagesPerView(2);
+			return;
+		}
 		if (window.innerWidth < 1440) {
+			setPagesPerViewSmall(2);
 			setPagesPerView(2);
 			return;
 		}
 		if (window.innerWidth > 1440) {
+			setPagesPerViewSmall(3);
 			setPagesPerView(3);
 		}
 	};
@@ -84,6 +97,16 @@ function HomePage() {
 	return (
 		<div className={styles.page}>
 			<Offer setOpen={setOfferActive} open={offerActive}></Offer>
+			<Consult setOpen={setConsultActive} open={consultActive} />
+			<Modal
+				videoModal={true}
+				setModalActive={setVideoActive}
+				active={videoActive}
+			>
+				<video className={styles['video']} controls>
+					<source src='/mzmo-ams/video.mp4' type='video/mp4'></source>
+				</video>
+			</Modal>
 			<Wrapper>
 				<section className={styles.preview}>
 					<div className={styles['preview-info']}>
@@ -111,6 +134,10 @@ function HomePage() {
 								удаленный мониторинг
 							</li>
 						</ul>
+						<p className={styles['subtitle']}>
+							Система УОС-АМС обеспечивает абсолютную защиту от
+							инфекций и полное соответствие СанПиН и СП.
+						</p>
 						<div className={styles['preview-actions']}>
 							<HashLink
 								scroll={customScroll}
@@ -157,6 +184,29 @@ function HomePage() {
 					</div>
 				</section>
 			</Wrapper>
+			<section className={styles['video-section']}>
+				<Wrapper>
+					<div className={styles['video-section-inner']}>
+						<Heading className={styles['video-title']} type='h2'>
+							Как работает
+							<span className={styles['video-subtitle']}>
+								УОС-АМС
+							</span>
+						</Heading>
+						<div
+							onClick={() => {
+								setVideoActive(true);
+							}}
+							className={styles['btn-play']}
+						>
+							<img
+								className={styles['btn-play-img']}
+								src='/mzmo-ams/play-button.svg'
+							/>
+						</div>
+					</div>
+				</Wrapper>
+			</section>
 			<section id='usage' className={styles['usage-section']}>
 				<Heading type='h2' hidden>
 					Для кого разработана и целевая аудитория
@@ -389,6 +439,65 @@ function HomePage() {
 								</li>
 							</ul>
 						</div>
+						<div className={styles['works-info']}>
+							<Heading
+								className={styles['consists-title']}
+								type='h3'
+							>
+								Комплектация:
+							</Heading>
+							<ol className={styles['works-list']}>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Накопительный бак для сточных вод.
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Система фильтров предварительной
+										очистки.
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Парогенераторы для термической
+										обработки.
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Система контроля температуры и времени
+										выдержки
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Система охлаждения обработанных стоков.
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Насосы для подачи и слива сточных вод
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Автоматизированная система управления и
+										контроля.
+									</p>
+								</li>
+								<li className={styles['works-item']}>
+									<p className={styles['works-text']}>
+										Резервные узлы для обеспечения
+										бесперебойной работы.
+									</p>
+								</li>
+							</ol>
+						</div>
+						<img
+							src='/mzmo-ams/draft.jpg'
+							className={styles['works-img']}
+						/>
 					</div>
 				</Wrapper>
 			</section>
@@ -583,42 +692,180 @@ function HomePage() {
 							промышленности, обеспечивая чистоту воздуха и
 							окружающей среды на уровне мировых стандартов
 						</p>
-						<ul className={styles['about-us-list']}>
-							<li className={styles['about-us-item']}>
-								<span className={styles['about-us-item-title']}>
-									31+
-								</span>
-								ЛЕТ НА РЫНКЕ
+						<div className={styles['about-us-digits']}>
+							<ul className={styles['about-us-list']}>
+								<li className={styles['about-us-item']}>
+									<span
+										className={
+											styles['about-us-item-title']
+										}
+									>
+										31+
+									</span>
+									ЛЕТ НА РЫНКЕ
+								</li>
+								<li className={styles['about-us-item']}>
+									<span
+										className={
+											styles['about-us-item-title']
+										}
+									>
+										450+
+									</span>
+									ПРОЕКТОВ
+								</li>
+								<li className={styles['about-us-item']}>
+									<span
+										className={
+											styles['about-us-item-title']
+										}
+									>
+										300+
+									</span>
+									ТЫС. КВ.М КЧП
+								</li>
+								<li className={styles['about-us-item']}>
+									<span
+										className={
+											styles['about-us-item-title']
+										}
+									>
+										18+
+									</span>
+									ТЫС. КВ.М ПРОИЗВОДСТВО
+								</li>
+								<li className={styles['about-us-item']}>
+									<span
+										className={
+											styles['about-us-item-title']
+										}
+									>
+										900+
+									</span>
+									НОМЕНКЛАТУРНЫЙ РЯД
+								</li>
+								<li className={styles['about-us-item']}>
+									<span
+										className={
+											styles['about-us-item-title']
+										}
+									>
+										650
+									</span>
+									СПЕЦИАЛИСТОВ
+								</li>
+							</ul>
+							<Carousel
+								className={styles['gallery']}
+								pagesPerView={pagesPerViewSmall}
+							>
+								<Carousel.Page>
+									<div className={styles['gallery-page']}>
+										<Image src='/mzmo-ams/gallery-1.jpg' />
+									</div>
+								</Carousel.Page>
+								<Carousel.Page>
+									<div className={styles['gallery-page']}>
+										<Image src='/mzmo-ams/gallery-2.jpg' />
+									</div>
+								</Carousel.Page>
+								<Carousel.Page>
+									<div className={styles['gallery-page']}>
+										<Image src='/mzmo-ams/gallery-4.png' />
+									</div>
+								</Carousel.Page>
+								<Carousel.Page>
+									<div className={styles['gallery-page']}>
+										<Image src='/mzmo-ams/priborostr-zavod2.jpg' />
+									</div>
+								</Carousel.Page>
+								<Carousel.Page>
+									<div className={styles['gallery-page']}>
+										<Image src='/mzmo-ams/vivar2.jpg' />
+									</div>
+								</Carousel.Page>
+								<Carousel.Page>
+									<div className={styles['gallery-page']}>
+										<Image src='/mzmo-ams/19-4.jpg' />
+									</div>
+								</Carousel.Page>
+							</Carousel>
+						</div>
+						<Heading className={styles['reasons-title']} type='h2'>
+							Вот почему выбор производителя, а не посредника,
+							имеет огромное значение
+						</Heading>
+						<ul className={styles['reasons-list']}>
+							<li className={styles['reasons-item']}>
+								<img
+									className={styles['reason-img']}
+									src='/mzmo-ams/kontrol_nad_blablabla.jpg'
+								></img>
+								<Heading
+									className={styles['reason-title']}
+									type='h3'
+								>
+									КОНТРОЛЬ НАД КАЖДЫМ ЭТАПОМ ПРОИЗВОДСТВА
+								</Heading>
+								<p className={styles['reason-info']}>
+									контролируем весь процесс от разработки и
+									проектирования до производства, монтажа и
+									ввода в эксплуатаци
+								</p>
 							</li>
-							<li className={styles['about-us-item']}>
-								<span className={styles['about-us-item-title']}>
-									450+
-								</span>
-								ПРОЕКТОВ
+							<li className={styles['reasons-item']}>
+								<img
+									className={styles['reason-img']}
+									src='/mzmo-ams/individuality.jpg'
+								></img>
+								<Heading
+									className={styles['reason-title']}
+									type='h3'
+								>
+									ГИБКОСТЬ И ИНДИВИДУАЛЬНЫЙ ПОДХОД
+								</Heading>
+								<p className={styles['reason-info']}>
+									можем адаптировать наши решения под
+									специфические потребности каждого клиента,
+									тогда как посредники часто ограничены в
+									возможностях изменения стандартных решений
+								</p>
 							</li>
-							<li className={styles['about-us-item']}>
-								<span className={styles['about-us-item-title']}>
-									300+
-								</span>
-								ТЫС. КВ.М КЧП
+							<li className={styles['reasons-item']}>
+								<img
+									className={styles['reason-img']}
+									src='/mzmo-ams/price.jpg'
+								></img>
+								<Heading
+									className={styles['reason-title']}
+									type='h3'
+								>
+									ОПТИМИЗАЦИЯ ЗАТРАТ
+								</Heading>
+								<p className={styles['reason-info']}>
+									работая напрямую с производителем, вы
+									избегаете дополнительных наценок и получаете
+									лучшее соотношение цены и качества.
+								</p>
 							</li>
-							<li className={styles['about-us-item']}>
-								<span className={styles['about-us-item-title']}>
-									18+
-								</span>
-								ТЫС. КВ.М ПРОИЗВОДСТВО
-							</li>
-							<li className={styles['about-us-item']}>
-								<span className={styles['about-us-item-title']}>
-									900+
-								</span>
-								НОМЕНКЛАТУРНЫЙ РЯД
-							</li>
-							<li className={styles['about-us-item']}>
-								<span className={styles['about-us-item-title']}>
-									650
-								</span>
-								СПЕЦИАЛИСТОВ
+							<li className={styles['reasons-item']}>
+								<img
+									className={styles['reason-img']}
+									src='/mzmo-ams/podderzhka.jpg'
+								></img>
+								<Heading
+									className={styles['reason-title']}
+									type='h3'
+								>
+									ПОДДЕРЖКА И ПОСТПРОЕКТНОЕ ОБСЛУЖИВАНИ
+								</Heading>
+								<p className={styles['reason-info']}>
+									мы предоставляем полную техническую
+									поддержку на всех этапах проекта и после его
+									завершения. Наши клиенты всегда могут
+									рассчитывать на оперативное решение любых
+									возникающих вопросов
+								</p>
 							</li>
 						</ul>
 					</div>
@@ -747,23 +994,32 @@ function HomePage() {
 				</Wrapper>
 			</section>
 
-			<section className={styles['additional-council']}>
-				<Heading
-					className={styles['additional-council-title']}
-					type='h2'
-				>
-					Получите персональную консультацию + расчет сметы в 3-х
-					вариантах + скидку к договору 4%
-				</Heading>
-				<Image
-					modal={true}
-					className={styles['additional-council-img']}
-					src='/mzmo-ams/model (1).jpg'
-				/>
-				<Button className={styles['additional-council-btn']}>
-					Получить!
-				</Button>
-			</section>
+			<Wrapper>
+				<section className={styles['additional-council']}>
+					<div className={styles['additional-council-text']}>
+						<Heading
+							className={styles['additional-council-title']}
+							type='h2'
+						>
+							Получите персональную консультацию + расчет сметы в
+							3-х вариантах + скидку к договору 4%
+						</Heading>
+						<Button
+							onClick={() => {
+								setConsultActive(true);
+							}}
+							className={styles['additional-council-btn']}
+						>
+							Получить!
+						</Button>
+					</div>
+					<Image
+						modal={true}
+						className={styles['additional-council-img']}
+						src='/mzmo-ams/model (1).jpg'
+					/>
+				</section>
+			</Wrapper>
 		</div>
 	);
 }
