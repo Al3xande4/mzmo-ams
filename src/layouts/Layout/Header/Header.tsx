@@ -18,11 +18,13 @@ function Header({ className }: HeaderProps) {
 	return (
 		<header className={cn(className, styles.header)}>
 			<Offer setOpen={setOfferActive} open={offerActive}></Offer>
-			<img
-				className={styles.logo}
-				alt='Логотип компании'
-				src='/mzmo-ams/МЗМО.svg'
-			/>
+			<a href='https://www.laminar.ru/' target='_blank'>
+				<img
+					className={styles.logo}
+					alt='Логотип компании'
+					src='/mzmo-ams/МЗМО.svg'
+				/>
+			</a>
 			<nav
 				className={cn(styles.navigation, {
 					[styles.active]: active,

@@ -96,7 +96,11 @@ function HomePage() {
 
 	return (
 		<div className={styles.page}>
-			<Offer setOpen={setOfferActive} open={offerActive}></Offer>
+			<Offer
+				id='offer-home'
+				setOpen={setOfferActive}
+				open={offerActive}
+			></Offer>
 			<Consult setOpen={setConsultActive} open={consultActive} />
 			<Modal
 				videoModal={true}
@@ -977,49 +981,48 @@ function HomePage() {
 							</FaqItem>
 
 							<FaqItem title='Как можно сэкономить?'>
-								Да, мы осуществляем авторский надзор. Он
-								позволяет избежать ошибок при строительстве:
-								выявление отклонений от проекта, принятие
-								решений по внесению необходимых изменений в
-								проект, а также для контроля возможных проектных
-								изменений. По условиям договора или по вызову
-								Заказчика для проведения авторского надзора на
-								строительную площадку выезжают специалисты для
-								промежуточной приемки конструкций. В "Журнале
-								авторского надзора" фиксируется соответствия и
-								отклонения от проектной документации.
+								Существенно сэкономить позволяют доставерные,
+								полные и неменяющиеся исходные данные, а также
+								дальнейшее последовательное выполние работы по
+								проектированию: разработка документации (сначало
+								графическая часть, потом спецификация), далее
+								разработка сметной документации, далее
+								согласование проектно-сметной документации
+								Заказчиком.
 							</FaqItem>
 						</ul>
 					</div>
 				</Wrapper>
 			</section>
 
-			<Wrapper>
-				<section className={styles['additional-council']}>
-					<div className={styles['additional-council-text']}>
-						<Heading
-							className={styles['additional-council-title']}
-							type='h2'
-						>
-							Получите персональную консультацию + расчет сметы в
-							3-х вариантах + скидку к договору 4%
-						</Heading>
-						<Button
-							onClick={() => {
-								setConsultActive(true);
-							}}
-							className={styles['additional-council-btn']}
-						>
-							Получить!
-						</Button>
-					</div>
-					<Image
-						modal={true}
-						className={styles['additional-council-img']}
-						src='/mzmo-ams/model (1).jpg'
-					/>
-				</section>
-			</Wrapper>
+			<div className={styles['additional-council-wrapper']}>
+				<Wrapper>
+					<section className={styles['additional-council']}>
+						<div className={styles['additional-council-text']}>
+							<Heading
+								className={styles['additional-council-title']}
+								type='h2'
+							>
+								Получите персональную консультацию + расчет
+								сметы в 3-х вариантах + скидку к договору 4%
+							</Heading>
+							<Button
+								onClick={() => {
+									setConsultActive(true);
+								}}
+								className={styles['additional-council-btn']}
+							>
+								Получить!
+							</Button>
+						</div>
+						<Image
+							modal={true}
+							className={styles['additional-council-img']}
+							src='/mzmo-ams/model (1).jpg'
+						/>
+					</section>
+				</Wrapper>
+			</div>
 		</div>
 	);
 }

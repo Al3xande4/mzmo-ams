@@ -11,11 +11,13 @@ export function Footer({ className, ...props }: FooterProps) {
 			<Wrapper>
 				<div className={styles['footer-inner']}>
 					<div className={styles['info']}>
-						<img
-							className={styles['logo']}
-							alt='Логотип компании'
-							src='/mzmo-ams/МЗМО.svg'
-						></img>
+						<a href='https://www.laminar.ru/' target='_blank'>
+							<img
+								className={styles['logo']}
+								alt='Логотип компании'
+								src='/mzmo-ams/МЗМО.svg'
+							></img>
+						</a>
 						<p className={styles['info-additional']}>
 							© ООО «МЗМО», 2002-2022
 							<br />
@@ -49,14 +51,26 @@ export function Footer({ className, ...props }: FooterProps) {
 					<div className={styles['socials-block']}>
 						<ul className={styles.socials}>
 							<a href=''>
-								<Button size='small'>
-									<img src='/mzmo-ams/vk.svg'></img>
+								<Button
+									className={styles['socials-item']}
+									size='small'
+								>
+									<img
+										className={styles['socials-logo']}
+										src='/mzmo-ams/vk-logo.svg'
+									></img>
 								</Button>
 							</a>
 
 							<a href=''>
-								<Button size='small'>
-									<img src='https://static.rutube.ru/static/img/favicon-icons/v3/favicon.ico'></img>
+								<Button
+									className={styles['socials-item']}
+									size='small'
+								>
+									<img
+										className={styles['socials-logo']}
+										src='/mzmo-ams/rutube.svg'
+									></img>
 								</Button>
 							</a>
 						</ul>

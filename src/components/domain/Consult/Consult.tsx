@@ -6,6 +6,7 @@ import { ConsultProps } from './Consult.props';
 import styles from './Consult.module.css';
 import { Modal } from '../../ui/Modal/Modal';
 import { Heading } from '../../ui/Heading/Heading';
+import { Textarea } from '../../ui/Textarea/Textarea';
 
 export function Consult({ open, setOpen, className, ...props }: ConsultProps) {
 	const [name, setName] = useState('');
@@ -97,7 +98,7 @@ export function Consult({ open, setOpen, className, ...props }: ConsultProps) {
 							>
 								Сообщение
 							</label>
-							<Input
+							<Textarea
 								id='message'
 								name='message'
 								className={styles['input-big']}
@@ -112,11 +113,11 @@ export function Consult({ open, setOpen, className, ...props }: ConsultProps) {
 					</div>
 					<div>
 						<input
-							id='policy'
-							name='policy'
+							id='policy-consult'
+							name='policy-consult'
 							type='checkbox'
 						></input>
-						<label htmlFor='policy'>
+						<label htmlFor='policy-consult'>
 							Согласен(а) с политикой конфиденциальности
 						</label>
 					</div>

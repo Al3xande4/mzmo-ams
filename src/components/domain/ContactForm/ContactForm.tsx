@@ -103,6 +103,16 @@ export function ContactForm({
 					/>
 				</fieldset>
 			</div>
+			<div>
+				<input
+					id='policy-contact'
+					name='policy-contact'
+					type='checkbox'
+				></input>
+				<label htmlFor='policy-contact'>
+					Согласен(а) с политикой конфиденциальности
+				</label>
+			</div>
 			<Button
 				onClick={(e) => {
 					e.preventDefault();

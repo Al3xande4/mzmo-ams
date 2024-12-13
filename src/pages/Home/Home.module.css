@@ -870,14 +870,18 @@
 	align-items: center;
 	justify-content: center;
 }
+.additional-council-wrapper {
+	background-color: var(--secondary-color);
+}
 .additional-council-text {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	color: white;
 }
 
 .additional-council-title {
-	color: black;
+	color: white;
 }
 
 .additional-council-btn {

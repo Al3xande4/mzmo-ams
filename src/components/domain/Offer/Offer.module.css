@@ -16,6 +16,13 @@
 
 	position: relative;
 }
+.error {
+	color: red;
+	display: block;
+}
+.error.hidden {
+	display: none;
+}
 
 .fieldset.big {
 	grid-column: span 2;

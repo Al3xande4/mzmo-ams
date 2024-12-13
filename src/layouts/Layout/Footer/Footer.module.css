@@ -2,7 +2,6 @@
 	box-sizing: border-box;
 	max-width: 100vw;
 	border-top: 1px solid grey;
-	margin-top: 40px;
 }
 
 .footer-inner {
@@ -75,4 +74,12 @@
 	display: flex;
 	flex-direction: row;
 	gap: 40px;
+}
+.socials .socials-item {
+	padding: 25px;
+}
+
+.socials-logo {
+	width: 30px;
+	height: 30px;
 }
