@@ -13,10 +13,49 @@ import { ContactForm } from '../../components/domain/ContactForm/ContactForm';
 import { Image } from '../../components/ui/Image/Image';
 import { Quiz } from '../../components/domain/Quiz/Quiz';
 import { Offer } from '../../components/domain/Offer/Offer';
+import { QuizItem } from '../../components/domain/Quiz/Quiz.props';
+
+const questions: QuizItem[] = [
+	{
+		question: 'Какой примерный объем сточных вод нужно обрабатывать?',
+		choices: ['30', '50', '100'],
+	},
+	{
+		question: 'Нужна ли автоматизация процесса?',
+		choices: ['Да', 'Нет'],
+	},
+	{
+		question: 'Есть ли подвальное помещение в вашем строении?',
+		choices: ['Да', 'Нет'],
+	},
+	{
+		question: 'Укажите примерные сроки в которые нужно реализовать проект',
+		choices: ['Месяц', 'Полгода', 'Год'],
+	},
+	{
+		question:
+			'Требуется модернизация действующий системы или установка с чистого листа?',
+		choices: ['Требуется модернизация', 'Установка с читого листа'],
+	},
+];
 
 function HomePage() {
 	const [pagesPerView, setPagesPerView] = useState(3);
 	const [offerActive, setOfferActive] = useState(false);
+	const [quizActive, setQuizActive] = useState(true);
+	const [quizAnswers, setQuizAnswers] = useState<number[]>();
+	const [quizTextAnswers, setQuizTextAnswers] = useState<string[]>();
+
+	useEffect(() => {
+		if (!quizAnswers) {
+			return;
+		}
+		const textAnswers = new Array(quizAnswers.length);
+		for (let i = 0; i < quizAnswers.length; i++) {
+			textAnswers[i] = questions[i].choices[quizAnswers[i]];
+		}
+		setQuizTextAnswers(textAnswers);
+	}, [quizAnswers]);
 
 	const handleResize = () => {
 		if (window.innerWidth < 900) {
@@ -365,107 +404,70 @@ function HomePage() {
 							сточных вод + нормативные документы СанПиН и СП
 						</Heading>
 
-						<ul className={styles['requirements-list']}>
+						<ol className={styles['requirements-list']}>
 							<li className={styles['requirements-item']}>
-								<UsageItem
-									img={'/mzmo-ams/checklist.svg'}
-									description='
-									П 2.1.3678-20 «Санитарно-эпидемиологические
-									требования к эксплуатации помещений...»
-									'
-								/>
+								П 2.1.3678-20 «Санитарно-эпидемиологические
+								требования к эксплуатации помещений...»
 							</li>
 							<li className={styles['requirements-item']}>
-								<UsageItem
-									img={'/mzmo-ams/checklist.svg'}
-									description='
-									п. 4.4.3 Очистка и обеззараживание сточных
-									вод от медицинских организаций должна
-									осуществляться на общегородских или других
-									канализационных очистных сооружениях,
-									гарантирующих эффективную очистку и
-									обеззараживание сточных вод. При отсутствии
-									очистных сооружений сточные воды медицинских
-									организаций должны подвергаться полной
-									биологической очистке и обеззараживанию на
-									локальных сооружениях.
-									'
-								/>
+								п. 4.4.3 Очистка и обеззараживание сточных вод
+								от медицинских организаций должна осуществляться
+								на общегородских или других канализационных
+								очистных сооружениях, гарантирующих эффективную
+								очистку и обеззараживание сточных вод. При
+								отсутствии очистных сооружений сточные воды
+								медицинских организаций должны подвергаться
+								полной биологической очистке и обеззараживанию
+								на локальных сооружениях. '
 							</li>
 							<li className={styles['requirements-item']}>
-								<UsageItem
-									img={'/mzmo-ams/checklist.svg'}
-									description='
-									СанПиН 3.3686-21
-									«Санитарно-эпидемиологические требования по
-									профилактике инфекционных болезней»
-									'
-								/>
+								СанПиН 3.3686-21 «Санитарно-эпидемиологические
+								требования по профилактике инфекционных
+								болезней»
 							</li>
 							<li className={styles['requirements-item']}>
-								<UsageItem
-									img={'/mzmo-ams/checklist.svg'}
-									description='
-									п. 206. По окончании работы все объекты,
-									содержащие ПБА, убирают в хранилища
-									(холодильники, термостаты, шкафы и другие,
-									которые опечатываются); проводят текущую
-									дезинфекцию рабочих поверхностей и
-									используемого оборудования. Не допускается
-									слив необеззараженных жидкостей в
-									канализационную сеть и вынос из «заразной»
-									зоны необеззараженных отходов
-									'
-								/>
+								п. 206. По окончании работы все объекты,
+								содержащие ПБА, убирают в хранилища
+								(холодильники, термостаты, шкафы и другие,
+								которые опечатываются); проводят текущую
+								дезинфекцию рабочих поверхностей и используемого
+								оборудования. Не допускается слив
+								необеззараженных жидкостей в канализационную
+								сеть и вынос из «заразной» зоны необеззараженных
+								отходов
 							</li>
-						</ul>
+							<li className={styles['requirements-item']}>
+								п. 342. К лабораториям, осуществляющим работы с
+								ПБА II группы, предъявляются следующие
+								санитарно-эпидемиологические требования.
+							</li>
+							<li className={styles['requirements-item']}>
+								подпункт 17. Запрещается слив (сток)
+								необеззараженных жидкостей в канализационную
+								сеть. Во вновь строящихся и реконструируемых
+								организациях или их подразделениях
+								проектирование и функционирование системы
+								специальной канализации, сбора и обеззараживания
+								стоков из «заразной» зоны осуществляется в
+								соответствии с
+							</li>
+							<li className={styles['requirements-item']}>
+								41. Систему обработки сточных вод составляет
+								комплекс оборудования, обеспечивающий сбор,
+								обезвреживание, охлаждение при термическом
+								обеззараживании и сброс сточных вод в наружные
+								сети канализации. По принципу работы системы
+								тепловой обработки сточных вод подразделяются на
+								циклические и непрерывной обработки.
+							</li>
+						</ol>
 
-						<ul className={styles['requirements-list']}>
-							<li className={styles['requirements-item']}>
-								<UsageItem
-									img={'/mzmo-ams/checklist.svg'}
-									description='
-									п. 342. К лабораториям, осуществляющим
-									работы с ПБА II группы, предъявляются
-									следующие санитарно-эпидемиологические
-									требования.
-									'
-								/>
-							</li>
-							<li className={styles['requirements-item']}>
-								<UsageItem
-									img={'/mzmo-ams/checklist.svg'}
-									description='
-									подпункт 17. Запрещается слив (сток)
-									необеззараженных жидкостей в канализационную
-									сеть. Во вновь строящихся и реконструируемых
-									организациях или их подразделениях
-									проектирование и функционирование системы
-									специальной канализации, сбора и
-									обеззараживания стоков из «заразной» зоны
-									осуществляется в соответствии с
-									'
-								/>
-							</li>
-							<li className={styles['requirements-item']}>
-								<UsageItem
-									img={'/mzmo-ams/checklist.svg'}
-									description='
-									41. Систему обработки сточных вод составляет
-									комплекс оборудования, обеспечивающий сбор,
-									обезвреживание, охлаждение при термическом
-									обеззараживании и сброс сточных вод в
-									наружные сети канализации. По принципу
-									работы системы тепловой обработки сточных
-									вод подразделяются на циклические и
-									непрерывной обработки.
-									'
-								/>
-							</li>
-						</ul>
 						<div className={styles['checklist-container']}>
 							<div className={styles['checklist-info']}>
-								<Heading type='h3'>
+								<Heading
+									className={styles['checklist-title']}
+									type='h3'
+								>
 									Скачайте бесплатно наш чек-лист, чтобы:
 								</Heading>
 								<ul className={styles['checklist-list']}>
@@ -500,10 +502,10 @@ function HomePage() {
 									</Button>
 								</a>
 							</div>
-							<img
+							<Image
 								src='/mzmo-ams/mockup.webp'
-								className={styles['check-list-preview']}
-							></img>
+								className={styles['checklist-preview']}
+							></Image>
 						</div>
 					</div>
 				</Wrapper>
@@ -511,20 +513,25 @@ function HomePage() {
 
 			<section id='ask-question' className={styles['questions']}>
 				<Wrapper>
+					<Heading className={styles['question-title']} type='h2'>
+						Подберите оптимальное решение онлайн и получите
+						коммерческое предложение в течении 3 часов + скидку к
+						договору 4%
+					</Heading>
 					<Quiz
-						questions={[
-							{
-								question:
-									'Какой примерный объем сточных вод нужно обрабатывать?',
-								choices: ['30', '50', '100'],
-							},
-							{
-								question: 'Нужна ли автоматизация процесса?',
-								choices: ['Да', 'Нет'],
-							},
-						]}
+						endQuiz={(answers) => {
+							setQuizAnswers(answers);
+							setQuizActive(false);
+						}}
+						prevAnswers={quizAnswers}
+						className={classNames({ [styles.hidden]: !quizActive })}
+						questions={questions}
 					/>
-					<div className={styles['questions-inner']}>
+					<div
+						className={classNames(styles['questions-inner'], {
+							[styles.hidden]: quizActive,
+						})}
+					>
 						<div className={styles['question-img-wrapper']}>
 							<img
 								className={styles['question-img']}
@@ -533,16 +540,26 @@ function HomePage() {
 							></img>
 						</div>
 						<div className={styles['question-desc']}>
-							<Heading
-								className={styles['question-title']}
-								type='h2'
+							<div
+								onClick={() => {
+									setQuizActive(true);
+								}}
+								className={styles['question-back']}
 							>
-								Подберите оптимальное решение онлайн и получите
-								коммерческое предложение в течении 3 часов +
-								скидку к договору 4%
+								<img
+									src='/mzmo-ams/arrow-forward-simple.svg'
+									className={styles['question-back-icon']}
+								></img>
+								Вернуться к вопросам
+							</div>
+							<Heading
+								className={styles['questions-desc-title']}
+								type='h3'
+							>
+								Введите свои контакные данные и мы пришлем вам
+								наше предложение
 							</Heading>
-
-							<ContactForm />
+							<ContactForm quizAnswers={quizTextAnswers} />
 						</div>
 					</div>
 				</Wrapper>
@@ -621,27 +638,37 @@ function HomePage() {
 						>
 							<Carousel.Page>
 								<div className={styles['carousel-page']}>
-									<Image src='/mzmo-ams/model (1).jpg' />
+									<Image src='/mzmo-ams/6-4.jpg' />
 								</div>
 							</Carousel.Page>
 							<Carousel.Page>
 								<div className={styles['carousel-page']}>
-									<Image src='/mzmo-ams/model (2).jpg' />
+									<Image src='/mzmo-ams/7-4.jpg' />
 								</div>
 							</Carousel.Page>
 							<Carousel.Page>
 								<div className={styles['carousel-page']}>
-									<Image src='/mzmo-ams/model (4).jpg' />
+									<Image src='/mzmo-ams/8-5.jpg' />
 								</div>
 							</Carousel.Page>
 							<Carousel.Page>
 								<div className={styles['carousel-page']}>
-									<Image src='/mzmo-ams/model (6).jpg' />
+									<Image src='/mzmo-ams/13-4.jpg' />
 								</div>
 							</Carousel.Page>
 							<Carousel.Page>
 								<div className={styles['carousel-page']}>
-									<Image src='/mzmo-ams/model (7).jpg' />
+									<Image src='/mzmo-ams/priborostr-zavod2.jpg' />
+								</div>
+							</Carousel.Page>
+							<Carousel.Page>
+								<div className={styles['carousel-page']}>
+									<Image src='/mzmo-ams/vivar2.jpg' />
+								</div>
+							</Carousel.Page>
+							<Carousel.Page>
+								<div className={styles['carousel-page']}>
+									<Image src='/mzmo-ams/19-4.jpg' />
 								</div>
 							</Carousel.Page>
 						</Carousel>

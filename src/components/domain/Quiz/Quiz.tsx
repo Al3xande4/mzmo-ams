@@ -3,10 +3,27 @@ import { QuizProps } from './Quiz.props';
 import cn from 'classnames';
 import styles from './Quiz.module.css';
 
-export const Quiz = ({ questions, className, ...props }: QuizProps) => {
+export const Quiz = ({
+	endQuiz,
+	questions,
+	className,
+	prevAnswers = undefined,
+	...props
+}: QuizProps) => {
 	const [curr, setCurr] = useState(0);
 	const windowElRef = useRef<HTMLDivElement>(null);
 	const [width, setWidth] = useState(450);
+	const [answers, setAnswers] = useState<number[]>([]);
+	const [selected, setSelected] = useState(-1);
+	const [error, setError] = useState(-1);
+
+	useEffect(() => {
+		if (!prevAnswers) {
+			setAnswers(() => new Array(questions.length).fill(-1));
+			return;
+		}
+		setAnswers(prevAnswers);
+	}, [prevAnswers]);
 
 	useEffect(() => {
 		const resizeHandler = () => {
@@ -29,11 +46,27 @@ export const Quiz = ({ questions, className, ...props }: QuizProps) => {
 	}, [width, windowElRef]);
 
 	const nextQuestion = () => {
-		setCurr((prev) => Math.min(prev + 1, questions.length));
+		setCurr((prev) => Math.min(prev + 1, questions.length - 1));
+		setSelected(-1);
+		setError(-1);
 	};
 
 	const prevQuestion = () => {
 		setCurr((prev) => Math.max(0, prev - 1));
+		setSelected(-1);
+		setError(-1);
+	};
+
+	const handleEnd = () => {
+		for (let i = 0; i < questions.length; i++) {
+			if (answers[i] == -1) {
+				setError(i);
+				setCurr(i);
+				setSelected(-1);
+				return;
+			}
+		}
+		endQuiz(answers);
 	};
 
 	return (
@@ -54,6 +87,13 @@ export const Quiz = ({ questions, className, ...props }: QuizProps) => {
 							className={styles['quiz-item']}
 							key={index}
 						>
+							<div
+								className={cn(styles['error-message'], {
+									[styles.active]: error == index,
+								})}
+							>
+								Вы не ответили на вопрос {index + 1}
+							</div>
 							<div className={styles['quiz-item-title']}>
 								Вопрос {index + 1}
 							</div>
@@ -61,25 +101,96 @@ export const Quiz = ({ questions, className, ...props }: QuizProps) => {
 								{el.question}
 							</div>
 							<hr></hr>
-							{el.choices.map((el, choiceIndex) => (
-								<div className={styles['quiz-choice']}>
-									<input
-										className={styles['quiz-choice-input']}
+							<ul className={styles['quiz-choices-list']}>
+								{el.choices.map((el, choiceIndex) => (
+									<div
 										key={`${index}-${choiceIndex}`}
-										type='radio'
-										name={`question-${index}`}
-										id={`qustion-${index}-choice-${choiceIndex}`}
-									></input>
-									<label
-										className={styles['quiz-choice-label']}
-										id={`qustion-${index}-choice-${choiceIndex}`}
+										className={cn(styles['quiz-choice'], {
+											[styles.selected]:
+												selected == choiceIndex ||
+												answers[index] == choiceIndex,
+										})}
+										onClick={() => {
+											setAnswers((prev) => {
+												const newAnswers = prev;
+												newAnswers[index] = choiceIndex;
+												return newAnswers;
+											});
+											setSelected(choiceIndex);
+											setError(-1);
+										}}
 									>
-										{el}
-									</label>
-								</div>
-							))}
+										<input
+											className={
+												styles['quiz-choice-input']
+											}
+											type='radio'
+											name={`question-${index}`}
+											id={`qustion-${index}-choice-${choiceIndex}`}
+										></input>
+										<label
+											className={
+												styles['quiz-choice-label']
+											}
+											id={`qustion-${index}-choice-${choiceIndex}`}
+										>
+											{el}
+										</label>
+										<div className={styles.icon}>
+											<div
+												className={styles['icon-inner']}
+											></div>
+										</div>
+									</div>
+								))}
+							</ul>
 						</div>
 					))}
+				</div>
+			</div>
+			<div className={styles.actions}>
+				<div className={styles.nav}>
+					<div
+						onClick={() => {
+							prevQuestion();
+						}}
+						className={cn(styles.previous, styles.action, {
+							[styles.inactive]: curr == 0,
+						})}
+					>
+						<img
+							src='/mzmo-ams/arrow-forward-simple.svg'
+							className={cn(
+								styles['action-arrow'],
+								styles['arrow-back']
+							)}
+						></img>
+						<span className={styles['action-text']}>
+							Предыдуший
+						</span>
+					</div>
+					<div
+						onClick={() => {
+							nextQuestion();
+						}}
+						className={cn(styles.next, styles.action, {
+							[styles.inactive]: curr == questions.length - 1,
+						})}
+					>
+						<span className={styles['action-text']}>Следующий</span>
+						<img
+							src='/mzmo-ams/arrow-forward-simple.svg'
+							className={styles['action-arrow']}
+						></img>
+					</div>
+				</div>
+				<div
+					onClick={() => {
+						handleEnd();
+					}}
+					className={cn(styles.end, styles.action, {})}
+				>
+					Узнать стоимость
 				</div>
 			</div>
 		</div>
