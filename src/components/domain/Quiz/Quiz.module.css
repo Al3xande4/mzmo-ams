@@ -51,6 +51,7 @@
 }
 
 .quiz-item {
+	max-width: 100vw;
 	width: 100%;
 	padding: 0 30px;
 
@@ -154,8 +155,6 @@ input[type="radio"] {
 
 .quiz-item-question {
 	font-size: 24px;
-}
-.selected {
 }
 .icon {
 	width: 25px;

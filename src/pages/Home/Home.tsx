@@ -8,7 +8,7 @@ import { Carousel } from '../../components/domain/Carousel/Carousel';
 import { HashLink } from 'react-router-hash-link';
 import { customScroll } from '../../helpers/scroll';
 import { FaqItem } from '../../components/domain/FaqItem/FaqItem';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ContactForm } from '../../components/domain/ContactForm/ContactForm';
 import { Image } from '../../components/ui/Image/Image';
 import { Quiz } from '../../components/domain/Quiz/Quiz';
@@ -50,6 +50,15 @@ function HomePage() {
 	const [quizAnswers, setQuizAnswers] = useState<number[]>();
 	const [quizTextAnswers, setQuizTextAnswers] = useState<string[]>();
 	const [videoActive, setVideoActive] = useState(false);
+	const videoRef = useRef<HTMLVideoElement>(null);
+
+	useEffect(() => {
+		if (videoActive) {
+			videoRef.current?.play();
+		} else {
+			videoRef.current?.pause();
+		}
+	}, [videoActive]);
 
 	useEffect(() => {
 		if (!quizAnswers) {
@@ -107,7 +116,7 @@ function HomePage() {
 				setModalActive={setVideoActive}
 				active={videoActive}
 			>
-				<video className={styles['video']} controls>
+				<video ref={videoRef} className={styles['video']} controls>
 					<source src='/mzmo-ams/video.mp4' type='video/mp4'></source>
 				</video>
 			</Modal>

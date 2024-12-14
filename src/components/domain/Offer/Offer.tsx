@@ -18,16 +18,23 @@ export function Offer({ id, open, setOpen, className, ...props }: OfferProps) {
 	const [emailError, setEmailError] = useState(false);
 	const [select, setSelect] = useState(false);
 	const [selectError, setSelectError] = useState(false);
+	const [success, setSuccess] = useState(false);
 
-	useEffect(() => {
+	const nullifyForm = () => {
 		setNameError(false);
 		setPhoneError(false);
 		setEmailError(false);
+		setSuccess(false);
+		setSelect(false);
 		setSelectError(false);
 		setName('');
 		setPhone('');
 		setEmail('');
-	}, []);
+	};
+
+	useEffect(() => {
+		nullifyForm();
+	}, [open]);
 
 	const handleSubmit = () => {
 		if (!name) {
@@ -46,7 +53,9 @@ export function Offer({ id, open, setOpen, className, ...props }: OfferProps) {
 			return;
 		}
 
-		sendEmail({ name: name, phone: phone, email: email });
+		//sendEmail({ name: name, phone: phone, email: email });
+		nullifyForm();
+		setSuccess(true);
 	};
 
 	const sendEmailJ = () => {
@@ -69,131 +78,145 @@ export function Offer({ id, open, setOpen, className, ...props }: OfferProps) {
 		<Modal active={open} setModalActive={setOpen}>
 			<div className={styles.offer}>
 				<Heading type='h2'>Обратная связь</Heading>
-				<form
-					{...props}
-					id={`help-form${id}`}
-					className={cn(styles.form, className)}
-				>
-					<div className={styles['inputs']}>
-						<fieldset className={styles.fieldset}>
-							<label
-								className={cn(styles.label, {
-									[styles.hidden]: !name,
-								})}
-								htmlFor='name'
-							>
-								ФИО
-							</label>
-							<div
-								className={cn(styles.error, {
-									[styles.hidden]: !nameError,
-								})}
-							>
-								Поле имя не может быть пустым
-							</div>
-							<Input
-								name='name'
-								id='name'
-								placeholder='ФИО'
-								value={name}
-								onChange={(e) => {
-									setName(e.target.value);
-									setNameError(false);
-								}}
-							/>
-						</fieldset>
-
-						<fieldset className={styles.fieldset}>
-							<label
-								className={cn(styles.label, {
-									[styles.hidden]: !phone,
-								})}
-								htmlFor='phone'
-							>
-								Номер телефона
-							</label>
-							<div
-								className={cn(styles.error, {
-									[styles.hidden]: !phoneError,
-								})}
-							>
-								Поле нормер телефона не может быть пустым
-							</div>
-							<Input
-								name='phone'
-								id='phone'
-								placeholder='Номер телефона'
-								required
-								value={phone}
-								onChange={(e) => {
-									setPhone(e.target.value);
-									setPhoneError(false);
-								}}
-							/>
-						</fieldset>
-
-						<fieldset className={cn(styles.big, styles.fieldset)}>
-							<label
-								className={cn(styles.label, {
-									[styles.hidden]: !email,
-								})}
-								htmlFor='email'
-							>
-								Email
-							</label>
-							<div
-								className={cn(styles.error, {
-									[styles.hidden]: !emailError,
-								})}
-							>
-								Поле email не может быть пустым
-							</div>
-							<Input
-								id='email'
-								name='email'
-								className={styles['input-big']}
-								placeholder='Email'
-								required
-								value={email}
-								onChange={(e) => {
-									setEmail(e.target.value);
-									setEmailError(false);
-								}}
-							/>
-						</fieldset>
-					</div>
-					<div>
-						<input
-							id={`policy${id}`}
-							name={`policy${id}`}
-							type='checkbox'
-							onChange={(e) => {
-								setSelect((prev) => !prev);
-								setSelectError(false);
-							}}
-						></input>
-						<div
-							className={cn(styles.error, {
-								[styles.hidden]: !selectError,
-							})}
-						>
-							Согласитесь с политикой конфиденциальности
-						</div>
-						<label htmlFor={`policy${id}`}>
-							Согласен(а) с политикой конфиденциальности
-						</label>
-					</div>
-					<Button
-						onClick={(e) => {
-							e.preventDefault();
-							handleSubmit();
-						}}
-						className={styles['submit']}
-						type='submit'
+				{success && (
+					<div
+						className={cn(styles.success, {
+							[styles.hidden]: !success,
+						})}
 					>
-						Отправить
-					</Button>
-				</form>
+						Спасибо! Ваша заявка принята!
+					</div>
+				)}
+				{!success && (
+					<form
+						{...props}
+						id={`help-form${id}`}
+						className={cn(styles.form, className)}
+					>
+						<div className={styles['inputs']}>
+							<fieldset className={styles.fieldset}>
+								<label
+									className={cn(styles.label, {
+										[styles.hidden]: !name,
+									})}
+									htmlFor='name'
+								>
+									ФИО
+								</label>
+								<div
+									className={cn(styles.error, {
+										[styles.hidden]: !nameError,
+									})}
+								>
+									Поле имя не может быть пустым
+								</div>
+								<Input
+									name='name'
+									id='name'
+									placeholder='ФИО'
+									value={name}
+									onChange={(e) => {
+										setName(e.target.value);
+										setNameError(false);
+									}}
+								/>
+							</fieldset>
+
+							<fieldset className={styles.fieldset}>
+								<label
+									className={cn(styles.label, {
+										[styles.hidden]: !phone,
+									})}
+									htmlFor='phone'
+								>
+									Номер телефона
+								</label>
+								<div
+									className={cn(styles.error, {
+										[styles.hidden]: !phoneError,
+									})}
+								>
+									Поле нормер телефона не может быть пустым
+								</div>
+								<Input
+									name='phone'
+									id='phone'
+									placeholder='Номер телефона'
+									required
+									value={phone}
+									onChange={(e) => {
+										setPhone(e.target.value);
+										setPhoneError(false);
+									}}
+								/>
+							</fieldset>
+
+							<fieldset
+								className={cn(styles.big, styles.fieldset)}
+							>
+								<label
+									className={cn(styles.label, {
+										[styles.hidden]: !email,
+									})}
+									htmlFor='email'
+								>
+									Email
+								</label>
+								<div
+									className={cn(styles.error, {
+										[styles.hidden]: !emailError,
+									})}
+								>
+									Поле email не может быть пустым
+								</div>
+								<Input
+									id='email'
+									name='email'
+									className={styles['input-big']}
+									placeholder='Email'
+									required
+									value={email}
+									onChange={(e) => {
+										setEmail(e.target.value);
+										setEmailError(false);
+									}}
+								/>
+							</fieldset>
+						</div>
+						<div>
+							<input
+								id={`policy${id}`}
+								name={`policy${id}`}
+								type='checkbox'
+								checked={select}
+								onChange={(e) => {
+									setSelect((prev) => !prev);
+									setSelectError(false);
+								}}
+							></input>
+							<div
+								className={cn(styles.error, {
+									[styles.hidden]: !selectError,
+								})}
+							>
+								Вы не согласились с политикой конфиденциальности
+							</div>
+							<label htmlFor={`policy${id}`}>
+								Согласен(а) с политикой конфиденциальности
+							</label>
+						</div>
+						<Button
+							onClick={(e) => {
+								e.preventDefault();
+								handleSubmit();
+							}}
+							className={styles['submit']}
+							type='submit'
+						>
+							Отправить
+						</Button>
+					</form>
+				)}
 			</div>
 		</Modal>
 	);

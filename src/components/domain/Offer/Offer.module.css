@@ -20,6 +20,11 @@
 	color: red;
 	display: block;
 }
+@media (max-width: 500px) {
+	.error {
+		font-size: 14px;
+	}	
+}
 .error.hidden {
 	display: none;
 }
@@ -72,4 +77,8 @@
 	transition-property: all;
 	transition-duration: 2s;
 	transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.success {
+	font-size: 22px;
 }

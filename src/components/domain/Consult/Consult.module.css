@@ -37,6 +37,23 @@
 	justify-content: center;
 }
 
+.success {
+	font-size: 22px;
+}
+
+.error.hidden {
+	display: none;
+}
+@media (max-width: 500px) {
+	.error{ 
+		font-size: 14px;
+	}	
+}
+
+.error {
+	color: red;
+}
+
 .hidden {
 	opacity: 0;
 	visibility: hidden;
