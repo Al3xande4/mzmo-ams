@@ -46,9 +46,16 @@ export const Quiz = ({
 	}, [width, windowElRef]);
 
 	const nextQuestion = () => {
-		setCurr((prev) => Math.min(prev + 1, questions.length - 1));
 		setSelected(-1);
+		if (answers[curr] == -1) {
+			setError(curr);
+			return;
+		}
+		setCurr((prev) => Math.min(prev + 1, questions.length - 1));
 		setError(-1);
+		if (curr == questions.length - 1) {
+			handleEnd();
+		}
 	};
 
 	const prevQuestion = () => {
@@ -71,6 +78,13 @@ export const Quiz = ({
 
 	return (
 		<div className={cn(className, styles.quiz)}>
+			<div
+				className={cn(styles['error-message'], {
+					[styles.active]: error == curr,
+				})}
+			>
+				Вы не ответили на вопрос {curr + 1}
+			</div>
 			<div ref={windowElRef} className={styles.window}>
 				<div
 					style={{
@@ -87,13 +101,6 @@ export const Quiz = ({
 							className={styles['quiz-item']}
 							key={index}
 						>
-							<div
-								className={cn(styles['error-message'], {
-									[styles.active]: error == index,
-								})}
-							>
-								Вы не ответили на вопрос {index + 1}
-							</div>
 							<div className={styles['quiz-item-title']}>
 								Вопрос {index + 1}
 							</div>
@@ -173,9 +180,7 @@ export const Quiz = ({
 						onClick={() => {
 							nextQuestion();
 						}}
-						className={cn(styles.next, styles.action, {
-							[styles.inactive]: curr == questions.length - 1,
-						})}
+						className={cn(styles.next, styles.action, {})}
 					>
 						<span className={styles['action-text']}>Следующий</span>
 						<img
@@ -185,6 +190,7 @@ export const Quiz = ({
 					</div>
 				</div>
 				<div
+					style={{ display: 'none' }}
 					onClick={() => {
 						handleEnd();
 					}}

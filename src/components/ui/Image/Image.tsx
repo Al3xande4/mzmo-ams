@@ -18,7 +18,11 @@ export const Image = ({ className, modal = false, ...props }: ImageProps) => {
 			></img>
 
 			{modal && (
-				<Modal active={modalActive} setModalActive={setModalActive}>
+				<Modal
+					active={modalActive}
+					videoModal={true}
+					setModalActive={setModalActive}
+				>
 					<img
 						className={cn(styles['modal-img'], className)}
 						{...props}

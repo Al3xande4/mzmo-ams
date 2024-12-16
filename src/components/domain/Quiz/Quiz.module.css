@@ -33,7 +33,7 @@
 
 	transition: all;
 	transition-timing-function: ease-in-out;
-	transition-duration: 300ms;
+	transition-duration: 600ms;
 }
 
 .error-message {
@@ -45,9 +45,16 @@
 .error-message.active {
 	opacity: 1;
 	display: block;
-	margin-bottom: 2rem;
 
 	color: #FF3333;
+}
+@media (max-width: 640px) {
+	.error-message.active {
+		position: absolute;
+		bottom: -25px;
+		font-size: 20px;
+		font-weight: bold;
+	}
 }
 
 .quiz-item {
@@ -107,9 +114,17 @@
 	background-color: var(--light-primary-color);
 }
 @media (max-width: 640px) {
+	.quiz-item-question {
+		font-size: 18px !important;
+	}
 	.action-text {
 		display: none;
 	}	
+	.nav {
+		position: absolute;
+		right: 10px;
+		top: -10px;
+	}
 	.action {
 		padding: 15px;
 	}

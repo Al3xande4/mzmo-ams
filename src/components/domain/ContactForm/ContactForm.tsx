@@ -121,7 +121,7 @@ export function ContactForm({
 				className={styles['submit']}
 				type='submit'
 			>
-				Отправить
+				Узнать стоимость
 			</Button>
 		</form>
 	);
